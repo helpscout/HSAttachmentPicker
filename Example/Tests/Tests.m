@@ -1,44 +1,15 @@
-//
-//  HSAttachmentPickerTests.m
-//  HSAttachmentPickerTests
-//
-//  Created by Jason Gritman on 12/26/2017.
-//  Copyright (c) 2017 Jason Gritman. All rights reserved.
-//
-
-// https://github.com/kiwi-bdd/Kiwi
+#import "HSAttachmentPickerViewController.h"
 
 SPEC_BEGIN(InitialTests)
 
 describe(@"My initial tests", ^{
 
-  context(@"will fail", ^{
-
-      it(@"can do maths", ^{
-          [[@1 should] equal:@2];
-      });
-
-      it(@"can read", ^{
-          [[@"number" should] equal:@"string"];
+      it(@"should show picker menu", ^{
+          HSAttachmentPickerViewController *controller = (HSAttachmentPickerViewController*)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
+          [controller.openPickerButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+          [[controller.presentedViewController.class should] equal: UIAlertController.class];
       });
     
-      it(@"will wait and fail", ^{
-          NSObject *object = [[NSObject alloc] init];
-          [[expectFutureValue(object) shouldEventually] receive:@selector(autoContentAccessingProxy)];
-      });
-  });
-
-  context(@"will pass", ^{
-    
-      it(@"can do maths", ^{
-        [[@1 should] beLessThan:@23];
-      });
-    
-      it(@"can read", ^{
-          [[@"team" shouldNot] containString:@"I"];
-      });  
-  });
-  
 });
 
 SPEC_END
