@@ -7,7 +7,7 @@
 
 `HSAttachmentPicker` creates a `UIAlertConroller` as a menu to access file data from photos, the camera, and the document browser APIs available on iOS.
 
-![menu](https://dha4w82d62smt.cloudfront.net/items/3g1Q1K3Y1K3R0B2T2M3T/Screen%20Shot%202017-12-29%20at%2011.30.48%20AM.png)
+![menu](https://dha4w82d62smt.cloudfront.net/items/3g1Q1K3Y1K3R0B2T2M3T/Screen%20Shot%202017-12-29%20at%2011.30.48%20AM.png | width=100)
 
 ## Usage
 
