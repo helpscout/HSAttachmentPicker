@@ -214,7 +214,6 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     if (picker.sourceType != UIImagePickerControllerSourceTypeCamera) {
         NSString *mediaType = info[UIImagePickerControllerMediaType];
-        NSLog(mediaType);
         if ([mediaType isEqualToString:(NSString*)kUTTypeMovie]) {
             [picker dismissViewControllerAnimated:true completion:nil];
             [self uploadSavedMedia:info];
