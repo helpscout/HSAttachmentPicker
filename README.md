@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/cocoapods/l/HSAttachmentPicker.svg?style=flat)](http://cocoapods.org/pods/HSAttachmentPicker)
 [![Platform](https://img.shields.io/cocoapods/p/HSAttachmentPicker.svg?style=flat)](http://cocoapods.org/pods/HSAttachmentPicker)
 
-`HSAttachmentPicker` creates a `UIAlertConroller` as a menu to access file data from photos, the camera, and the document browser APIs available on iOS.
+`HSAttachmentPicker` creates a `UIAlertController` as a menu to access file data from photos, the camera, and the document browser APIs available on iOS.
 
 <img src="https://dha4w82d62smt.cloudfront.net/items/3g1Q1K3Y1K3R0B2T2M3T/Screen%20Shot%202017-12-29%20at%2011.30.48%20AM.png?X-CloudApp-Visitor-Id=db37a86382f770e73a24232f220b0404&v=ffa99392" width="376" height="648">
 
@@ -14,9 +14,9 @@
 You'll want to create a new `HSAttachmentPicker`, assign a delegate, and call `showAttachmentMenu`.
 
 ```objective-c
-    menu = [[HSAttachmentPicker alloc] init];
-    menu.delegate = self;
-    [menu showAttachmentMenu];
+menu = [[HSAttachmentPicker alloc] init];
+menu.delegate = self;
+[menu showAttachmentMenu];
 ```
 
 It's important you class holds a reference to the `HSAttachmentPicker` so it doesn't get garbage collected.
