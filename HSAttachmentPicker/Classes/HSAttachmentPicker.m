@@ -104,7 +104,7 @@
         }];
         [alert addAction:cancelAction];
         [alert addAction:okAction];
-        [_delegate attachmentPickerMenu:self showController:alert completion:nil];
+        [self.delegate attachmentPickerMenu:self showController:alert completion:nil];
     });
 }
 
@@ -132,10 +132,10 @@
         if (success) {
             NSData *contents = [NSFileManager.defaultManager contentsAtPath:url.path];
             NSString *fileName = [NSString stringWithFormat:@"%@.mov", NSUUID.UUID.UUIDString];
-            [_delegate attachmentPickerMenu:self upload:contents filename:fileName image:nil];
+            [self.delegate attachmentPickerMenu:self upload:contents filename:fileName image:nil];
         } else {
             NSString *errorMessage = [NSString stringWithFormat:@"Unable to save video: %@", error.localizedDescription];
-            [_delegate attachmentPickerMenu:self showErrorMessage:errorMessage];
+            [self.delegate attachmentPickerMenu:self showErrorMessage:errorMessage];
         }
     }];
 }
@@ -149,7 +149,7 @@
             [self useLastPhoto];
         } else {
             NSString *errorMessage = [NSString stringWithFormat:@"Unable to save photo: %@", error.localizedDescription];
-            [_delegate attachmentPickerMenu:self showErrorMessage:errorMessage];
+            [self.delegate attachmentPickerMenu:self showErrorMessage:errorMessage];
         }
     }];
 }
@@ -190,7 +190,7 @@
     [PHImageManager.defaultManager requestImageForAsset:photo targetSize:targetSize contentMode:PHImageContentModeAspectFit options:requestOptions resultHandler:^(UIImage *result, NSDictionary *info) {
         NSData *data = UIImageJPEGRepresentation(result, 0.5);
         NSString *filename = [photo valueForKey:@"filename"] ?: @"photo.jpg";
-        [_delegate attachmentPickerMenu:self upload:data filename:filename.lowercaseString image:result];
+        [self.delegate attachmentPickerMenu:self upload:data filename:filename.lowercaseString image:result];
     }];
 }
 
