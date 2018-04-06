@@ -23,6 +23,8 @@
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		96378B542077ECC800289262 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 96378B532077ECC800289262 /* Localizable.strings */; };
+		96378B562077ED3C00289262 /* HSAttachmentPicker.strings in Resources */ = {isa = PBXBuildFile; fileRef = 96378B552077ED3C00289262 /* HSAttachmentPicker.strings */; };
 		A67971358337C2E46C36F2AE /* Pods_HSAttachmentPicker_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 701CB53B134476EECC468DC8 /* Pods_HSAttachmentPicker_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +68,8 @@
 		716E76492098F4731517758E /* HSAttachmentPicker.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = HSAttachmentPicker.podspec; path = ../HSAttachmentPicker.podspec; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		96378B532077ECC800289262 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		96378B552077ED3C00289262 /* HSAttachmentPicker.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = HSAttachmentPicker.strings; sourceTree = "<group>"; };
 		9685600B1FF2EA1600850FDC /* HSAttachmentPicker_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HSAttachmentPicker_Example.entitlements; sourceTree = "<group>"; };
 		99A5BB6730D4E7DEB49C096C /* Pods-HSAttachmentPicker_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HSAttachmentPicker_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HSAttachmentPicker_Tests/Pods-HSAttachmentPicker_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -165,6 +169,8 @@
 				6003F596195388D20070C39A /* InfoPlist.strings */,
 				6003F599195388D20070C39A /* main.m */,
 				6003F59B195388D20070C39A /* HSAttachmentPicker-Prefix.pch */,
+				96378B532077ECC800289262 /* Localizable.strings */,
+				96378B552077ED3C00289262 /* HSAttachmentPicker.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -290,6 +296,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96378B562077ED3C00289262 /* HSAttachmentPicker.strings in Resources */,
+				96378B542077ECC800289262 /* Localizable.strings in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,

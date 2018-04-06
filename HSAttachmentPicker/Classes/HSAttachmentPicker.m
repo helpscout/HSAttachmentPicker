@@ -14,7 +14,7 @@
     UIAlertController *picker = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     NSString *showPhotosPermissionSettingsMessage = [NSBundle.mainBundle objectForInfoDictionaryKey:@"NSPhotoLibraryUsageDescription"];
     if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera] && showPhotosPermissionSettingsMessage != nil) {
-        UIAlertAction *takePhotoAction = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UIAlertAction *takePhotoAction = [UIAlertAction actionWithTitle:[self translateString:@"Take Photo"] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [self validatePhotosPermissions:^{
                 [self showImagePicker:UIImagePickerControllerSourceTypeCamera];
             }];
@@ -23,7 +23,7 @@
     }
 
     if (showPhotosPermissionSettingsMessage != nil) {
-        UIAlertAction *useLastPhotoAction = [UIAlertAction actionWithTitle:@"Use Last Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UIAlertAction *useLastPhotoAction = [UIAlertAction actionWithTitle:[self translateString:@"Use Last Photo"] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [self validatePhotosPermissions:^{
                 [self useLastPhoto];
             }];
@@ -32,7 +32,7 @@
     }
 
     if (showPhotosPermissionSettingsMessage != nil) {
-        UIAlertAction *chooseFromLibraryAction = [UIAlertAction actionWithTitle:@"Choose from Library" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UIAlertAction *chooseFromLibraryAction = [UIAlertAction actionWithTitle:[self translateString:@"Choose from Library"] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [self validatePhotosPermissions:^{
                 [self showImagePicker:UIImagePickerControllerSourceTypePhotoLibrary];
             }];
@@ -41,12 +41,12 @@
     }
 
 
-    UIAlertAction *importFileFromAction = [UIAlertAction actionWithTitle:@"Import File from" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertAction *importFileFromAction = [UIAlertAction actionWithTitle:[self translateString:@"Import File from"] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self showDocumentPicker];
     }];
     [picker addAction:importFileFromAction];
 
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:[self translateString:@"Cancel"] style:UIAlertActionStyleCancel handler:nil];
     [picker addAction:cancelAction];
 
     [_delegate attachmentPickerMenu:self showController:picker completion:nil];
@@ -61,7 +61,7 @@
         [_delegate attachmentPickerMenu:self showController:documentMenu completion:nil];
     }
     @catch (NSException *exception) {
-        [_delegate attachmentPickerMenu:self showErrorMessage:@"This application is not entitled to access iCloud"];
+        [_delegate attachmentPickerMenu:self showErrorMessage:[self translateString:@"This application is not entitled to access iCloud"]];
     }
 }
 
@@ -71,7 +71,7 @@
     fetchOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:true]];
     PHFetchResult<PHAsset *> *fetchResult = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:fetchOptions];
     if (fetchResult.count == 0) {
-        [_delegate attachmentPickerMenu:self showErrorMessage:@"There doesn't seem to be a photo taken yet."];
+        [_delegate attachmentPickerMenu:self showErrorMessage:[self translateString:@"There doesn't seem to be a photo taken yet."]];
         return;
     }
     [self uploadPhoto:fetchResult.lastObject];
@@ -97,9 +97,9 @@
 -(void)showPhotosPermissionSettingsMessage {
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *accessDescription = [NSBundle.mainBundle objectForInfoDictionaryKey:@"NSPhotoLibraryUsageDescription"];
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:accessDescription message:@"To give permissions tap on 'Change Settings' button" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:accessDescription message:[self translateString:@"To give permissions tap on 'Change Settings' button"] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:[self translateString:@"Cancel"] style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:[self translateString:@"OK"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [UIApplication.sharedApplication openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
         }];
         [alert addAction:cancelAction];
@@ -134,7 +134,7 @@
             NSString *fileName = [NSString stringWithFormat:@"%@.mov", NSUUID.UUID.UUIDString];
             [self.delegate attachmentPickerMenu:self upload:contents filename:fileName image:nil];
         } else {
-            NSString *errorMessage = [NSString stringWithFormat:@"Unable to save video: %@", error.localizedDescription];
+            NSString *errorMessage = [NSString stringWithFormat:[self translateString:@"Unable to save video: %@"], error.localizedDescription];
             [self.delegate attachmentPickerMenu:self showErrorMessage:errorMessage];
         }
     }];
@@ -148,7 +148,7 @@
         if (success) {
             [self useLastPhoto];
         } else {
-            NSString *errorMessage = [NSString stringWithFormat:@"Unable to save photo: %@", error.localizedDescription];
+            NSString *errorMessage = [NSString stringWithFormat:[self translateString:@"Unable to save photo: %@"], error.localizedDescription];
             [self.delegate attachmentPickerMenu:self showErrorMessage:errorMessage];
         }
     }];
@@ -192,6 +192,11 @@
         NSString *filename = [photo valueForKey:@"filename"] ?: @"photo.jpg";
         [self.delegate attachmentPickerMenu:self upload:data filename:filename.lowercaseString image:result];
     }];
+}
+
+- (NSString *)translateString:(NSString *)key {
+    NSBundle *bundle = self.translationsBundle ? self.translationsBundle : NSBundle.mainBundle;
+    return [bundle localizedStringForKey:key value:nil table:self.translationTable];
 }
 
 #pragma mark - HSAttachmentPickerPhotoPreviewControllerDelegate

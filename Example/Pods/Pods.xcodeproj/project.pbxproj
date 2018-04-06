@@ -368,7 +368,7 @@
 		93C7A4E21243C2B1AB3B59D642DD7D0E /* Pods-HSAttachmentPicker_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-HSAttachmentPicker_Example-dummy.m"; sourceTree = "<group>"; };
 		947134276A6AD51AC99F236BEE243DDC /* KWItNode.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWItNode.m; path = Classes/Nodes/KWItNode.m; sourceTree = "<group>"; };
 		95BF71FA9EABFDBF14D69972D2797205 /* KWContainStringMatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWContainStringMatcher.h; path = Classes/Matchers/KWContainStringMatcher.h; sourceTree = "<group>"; };
-		962900701FF6B1D80052652D /* HSAttachmentPicker.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = HSAttachmentPicker.strings; path = HSAttachmentPicker/Assets/HSAttachmentPicker.strings; sourceTree = "<group>"; };
+		962900701FF6B1D80052652D /* HSAttachmentPicker.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = HSAttachmentPicker.strings; sourceTree = "<group>"; };
 		969F25D914AF9E313506E0817AAA02AD /* KWMatcherFactory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWMatcherFactory.m; path = Classes/Core/KWMatcherFactory.m; sourceTree = "<group>"; };
 		975757BB5A74FCD47B2BB40E7D80E392 /* KWMessageSpying.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWMessageSpying.h; path = Classes/Core/KWMessageSpying.h; sourceTree = "<group>"; };
 		9795227F493D9349B527EB839486C8E6 /* KWRespondToSelectorMatcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWRespondToSelectorMatcher.m; path = Classes/Matchers/KWRespondToSelectorMatcher.m; sourceTree = "<group>"; };
@@ -783,7 +783,6 @@
 				DFD426681FC59B807154A71D395C6B17 /* HSAttachmentPickerPhotoPreviewController.h */,
 				394FD2393456A5CECF6C158BC18EA138 /* HSAttachmentPickerPhotoPreviewController.m */,
 				F223084F2DB7BFA263B08C023A15693E /* Support Files */,
-				962900701FF6B1D80052652D /* HSAttachmentPicker.strings */,
 			);
 			name = HSAttachmentPicker;
 			path = ../..;
@@ -824,6 +823,7 @@
 				1A3B6030C90C0F290D2626A50F89521F /* HSAttachmentPicker-dummy.m */,
 				02FD8DECAD4BB6A7E6BD295F19EACC97 /* HSAttachmentPicker-prefix.pch */,
 				B103F52730679433329F38C985DAC35A /* HSAttachmentPicker-umbrella.h */,
+				962900701FF6B1D80052652D /* HSAttachmentPicker.strings */,
 				2C0B2F2380AE2E4D6763A91F299480A6 /* Info.plist */,
 			);
 			name = "Support Files";
