@@ -13,6 +13,7 @@
 - (IBAction)openMenu:(id)sender {
     _menu = [[HSAttachmentPicker alloc] init];
     _menu.delegate = self;
+    _menu.translationTable = @"HSAttachmentPicker";
     [_menu showAttachmentMenu];
 }
 
