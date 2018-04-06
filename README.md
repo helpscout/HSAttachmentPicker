@@ -49,6 +49,42 @@ it, simply add the following line to your Podfile:
 pod 'HSAttachmentPicker'
 ```
 
+## Localization
+
+The following strings can be specified to override the default messaging:
+
+```
+/* Menu Items */
+
+"Take Photo"="Take Photo";
+
+"Use Last Photo"="Use Last Photo";
+
+"Choose from Library"="Choose from Library";
+
+"Import File from"="Import File from";
+
+"Cancel"="Cancel";
+
+"OK"="OK";
+
+/* Errors */
+
+"This application is not entitled to access iCloud"="This application is not entitled to access iCloud";
+
+"There doesn't seem to be a photo taken yet."="There doesn't seem to be a photo taken yet.";
+
+"To give permissions tap on 'Change Settings' button"="To give permissions tap on 'Change Settings' button";
+
+"Unable to save video: %@"="Unable to save video: %@";
+
+"Unable to save photo: %@"="Unable to save photo: %@";
+
+"Selected media type is unsupported"="Selected media type is unsupported";
+```
+
+By default it will check `NSBundle.mainBundle` and `Localizable.strings`, but these values can be overriden with the `translationsBundle` and `translationsTable` properties on the `HSAttachmentPicker` object.
+
 ## License
 
 HSAttachmentPicker is available under the MIT license. See the LICENSE file for more info.
