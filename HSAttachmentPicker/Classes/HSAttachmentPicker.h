@@ -16,6 +16,16 @@
 
 @property (nonatomic, weak, nullable) id<HSAttachmentPickerDelegate> delegate;
 
+/**
+ * This will default to NSBundle.mainBundle unless specified
+ */
+@property (nonatomic, nullable) NSBundle *translationsBundle;
+
+/**
+ * Use this specific .strings file for translations, uses system default (Localizable.strings) otherwise
+ */
+@property (nonatomic, nullable) NSString *translationTable;
+
 -(void)showAttachmentMenu;
 
 @end
