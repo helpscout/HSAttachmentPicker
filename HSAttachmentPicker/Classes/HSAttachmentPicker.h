@@ -17,7 +17,7 @@
 
 @interface HSAttachmentPicker : NSObject
 
-@property (nonatomic, weak) id<HSAttachmentPickerDelegate> delegate;
+@property (nonatomic, weak, nonnull) id<HSAttachmentPickerDelegate> delegate;
 
 /**
  * This will default to NSBundle.mainBundle unless specified
