@@ -34,4 +34,8 @@
     NSLog(@"uploading %@", filename);
 }
 
+- (void)attachmentPickerMenuDismissed:(HSAttachmentPicker *)menu {
+    NSLog(@"dismissed");
+}
+
 @end

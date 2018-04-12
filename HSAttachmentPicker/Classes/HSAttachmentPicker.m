@@ -46,7 +46,9 @@
     }];
     [picker addAction:importFileFromAction];
 
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:[self translateString:@"Cancel"] style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:[self translateString:@"Cancel"] style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [self dismissed];
+    }];
     [picker addAction:cancelAction];
 
     [_delegate attachmentPickerMenu:self showController:picker completion:nil];
@@ -61,7 +63,7 @@
         [_delegate attachmentPickerMenu:self showController:documentMenu completion:nil];
     }
     @catch (NSException *exception) {
-        [_delegate attachmentPickerMenu:self showErrorMessage:[self translateString:@"This application is not entitled to access iCloud"]];
+        [self showError:[self translateString:@"This application is not entitled to access iCloud"]];
     }
 }
 
@@ -71,7 +73,7 @@
     fetchOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:true]];
     PHFetchResult<PHAsset *> *fetchResult = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:fetchOptions];
     if (fetchResult.count == 0) {
-        [_delegate attachmentPickerMenu:self showErrorMessage:[self translateString:@"There doesn't seem to be a photo taken yet."]];
+        [self showError:[self translateString:@"There doesn't seem to be a photo taken yet."]];
         return;
     }
     [self uploadPhoto:fetchResult.lastObject];
@@ -131,11 +133,11 @@
     } completionHandler:^(BOOL success, NSError * _Nullable error) {
         if (success) {
             NSData *contents = [NSFileManager.defaultManager contentsAtPath:url.path];
-            NSString *fileName = [NSString stringWithFormat:@"%@.mov", NSUUID.UUID.UUIDString];
-            [self.delegate attachmentPickerMenu:self upload:contents filename:fileName image:nil];
+            NSString *filename = [NSString stringWithFormat:@"%@.mov", NSUUID.UUID.UUIDString];
+            [self upload:contents filename:filename image:nil];
         } else {
             NSString *errorMessage = [NSString stringWithFormat:[self translateString:@"Unable to save video: %@"], error.localizedDescription];
-            [self.delegate attachmentPickerMenu:self showErrorMessage:errorMessage];
+            [self showError:errorMessage];
         }
     }];
 }
@@ -149,9 +151,30 @@
             [self useLastPhoto];
         } else {
             NSString *errorMessage = [NSString stringWithFormat:[self translateString:@"Unable to save photo: %@"], error.localizedDescription];
-            [self.delegate attachmentPickerMenu:self showErrorMessage:errorMessage];
+            [self showError:errorMessage];
         }
     }];
+}
+
+- (NSString *)translateString:(NSString *)key {
+    NSBundle *bundle = self.translationsBundle ? self.translationsBundle : NSBundle.mainBundle;
+    return [bundle localizedStringForKey:key value:nil table:self.translationTable];
+}
+
+- (void)upload:(NSData *)data filename:(NSString *)filename image:(UIImage *)image {
+    [self.delegate attachmentPickerMenu:self upload:data filename:filename image:image];
+    [self dismissed];
+}
+
+- (void)dismissed {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(attachmentPickerMenuDismissed:)]) {
+        [self.delegate attachmentPickerMenuDismissed:self];
+    }
+}
+
+- (void)showError:(NSString *)errorMessage {
+    [self.delegate attachmentPickerMenu:self showErrorMessage:errorMessage];
+    [self dismissed];
 }
 
 #pragma mark - upload operations
@@ -168,7 +191,7 @@
                 break;
 
             default:
-                [_delegate attachmentPickerMenu:self showErrorMessage:@"Selected media type is unsupported"];
+                [self showError:[self translateString:@"Selected media type is unsupported"]];
                 break;
         }
     }
@@ -177,8 +200,8 @@
 -(void)uploadMovie:(NSDictionary<NSString *,id> *)info {
     NSURL *fileURL = info[UIImagePickerControllerMediaURL];
     NSData *videoData = [NSFileManager.defaultManager contentsAtPath:fileURL.path];
-    NSString *fileName = [NSString stringWithFormat:@"%@.mov", NSUUID.UUID.UUIDString];
-    [_delegate attachmentPickerMenu:self upload:videoData filename:fileName image:nil];
+    NSString *filename = [NSString stringWithFormat:@"%@.mov", NSUUID.UUID.UUIDString];
+    [self upload:videoData filename:filename image:nil];
 }
 
 -(void)uploadPhoto:(PHAsset*)photo {
@@ -190,13 +213,8 @@
     [PHImageManager.defaultManager requestImageForAsset:photo targetSize:targetSize contentMode:PHImageContentModeAspectFit options:requestOptions resultHandler:^(UIImage *result, NSDictionary *info) {
         NSData *data = UIImageJPEGRepresentation(result, 0.5);
         NSString *filename = [photo valueForKey:@"filename"] ?: @"photo.jpg";
-        [self.delegate attachmentPickerMenu:self upload:data filename:filename.lowercaseString image:result];
+        [self upload:data filename:filename.lowercaseString image:result];
     }];
-}
-
-- (NSString *)translateString:(NSString *)key {
-    NSBundle *bundle = self.translationsBundle ? self.translationsBundle : NSBundle.mainBundle;
-    return [bundle localizedStringForKey:key value:nil table:self.translationTable];
 }
 
 #pragma mark - HSAttachmentPickerPhotoPreviewControllerDelegate
@@ -208,11 +226,18 @@
 -(void)documentMenu:(UIDocumentMenuViewController *)documentMenu didPickDocumentPicker:(UIDocumentPickerViewController *)documentPicker{
     documentPicker.delegate = self;
     [_delegate attachmentPickerMenu:self showController:documentPicker completion:nil];
+
+-(void)documentMenuWasCancelled:(UIDocumentMenuViewController *)documentMenu {
+    [self dismissed];
 }
 
 #pragma mark - UIDocumentPickerDelegate
 -(void)documentPicker:(UIDocumentPickerViewController *)controller didPickDocumentAtURL:(NSURL *)url {
-    [_delegate attachmentPickerMenu:self upload:[NSData dataWithContentsOfURL:url] filename:url.path.lastPathComponent image:nil];
+    [self upload:[NSData dataWithContentsOfURL:url] filename:url.path.lastPathComponent image:nil];
+}
+
+-(void)documentPickerWasCancelled:(UIDocumentPickerViewController *)controller {
+    [self dismissed];
 }
 
 #pragma mark - UIImagePickerControllerDelegate
@@ -236,6 +261,12 @@
     } else {
         [self savePhotoFromCamera:info];
     }
+}
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:^{
+        [self dismissed];
+    }];
 }
 
 @end
