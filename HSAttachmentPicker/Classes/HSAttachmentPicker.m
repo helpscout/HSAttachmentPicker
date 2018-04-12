@@ -51,7 +51,7 @@
     }];
     [picker addAction:cancelAction];
 
-    [_delegate attachmentPickerMenu:self showController:picker completion:nil];
+    [self.delegate attachmentPickerMenu:self showController:picker completion:nil];
 }
 
 #pragma mark - import file
@@ -60,7 +60,7 @@
         NSArray *documentTypes = [[NSArray alloc] initWithObjects:(NSString*)kUTTypeItem, nil];
         UIDocumentMenuViewController *documentMenu = [[UIDocumentMenuViewController alloc] initWithDocumentTypes:documentTypes inMode:UIDocumentPickerModeImport];
         documentMenu.delegate = self;
-        [_delegate attachmentPickerMenu:self showController:documentMenu completion:nil];
+        [self.delegate attachmentPickerMenu:self showController:documentMenu completion:nil];
     }
     @catch (NSException *exception) {
         [self showError:[self translateString:@"This application is not entitled to access iCloud"]];
@@ -70,7 +70,7 @@
 #pragma mark - use last photo
 -(void)useLastPhoto {
     PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
-    fetchOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:true]];
+    fetchOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
     PHFetchResult<PHAsset *> *fetchResult = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:fetchOptions];
     if (fetchResult.count == 0) {
         [self showError:[self translateString:@"There doesn't seem to be a photo taken yet."]];
@@ -114,12 +114,12 @@
 -(void)showImagePicker:(UIImagePickerControllerSourceType)sourceType {
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.delegate = self;
-    imagePicker.allowsEditing = false;
+    imagePicker.allowsEditing = NO;
     imagePicker.mediaTypes = [[NSArray alloc] initWithObjects:(NSString*)kUTTypeImage, (NSString*)kUTTypeMovie, nil];
     imagePicker.videoQuality = UIImagePickerControllerQualityTypeLow;
     imagePicker.sourceType = sourceType;
-    [_delegate attachmentPickerMenu:self showController:imagePicker completion:^{
-        UIApplication.sharedApplication.statusBarHidden = true;
+    [self.delegate attachmentPickerMenu:self showController:imagePicker completion:^{
+        UIApplication.sharedApplication.statusBarHidden = YES;
     }];
 }
 
@@ -209,7 +209,7 @@
     CGSize targetSize = photo.pixelWidth > photo.pixelHeight ? CGSizeMake(1024, 768) : CGSizeMake(768, 1024);
     requestOptions.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
     requestOptions.resizeMode = PHImageRequestOptionsResizeModeExact;
-    requestOptions.synchronous = true;
+    requestOptions.synchronous = YES;
     [PHImageManager.defaultManager requestImageForAsset:photo targetSize:targetSize contentMode:PHImageContentModeAspectFit options:requestOptions resultHandler:^(UIImage *result, NSDictionary *info) {
         NSData *data = UIImageJPEGRepresentation(result, 0.5);
         NSString *filename = [photo valueForKey:@"filename"] ?: @"photo.jpg";
@@ -225,7 +225,8 @@
 #pragma mark - UIDocumentMenuDelegate
 -(void)documentMenu:(UIDocumentMenuViewController *)documentMenu didPickDocumentPicker:(UIDocumentPickerViewController *)documentPicker{
     documentPicker.delegate = self;
-    [_delegate attachmentPickerMenu:self showController:documentPicker completion:nil];
+    [self.delegate attachmentPickerMenu:self showController:documentPicker completion:nil];
+}
 
 -(void)documentMenuWasCancelled:(UIDocumentMenuViewController *)documentMenu {
     [self dismissed];
@@ -245,17 +246,17 @@
     if (picker.sourceType != UIImagePickerControllerSourceTypeCamera) {
         NSString *mediaType = info[UIImagePickerControllerMediaType];
         if ([mediaType isEqualToString:(NSString*)kUTTypeMovie]) {
-            [picker dismissViewControllerAnimated:true completion:nil];
+            [picker dismissViewControllerAnimated:YES completion:nil];
             [self uploadSavedMedia:info];
         } else {
             HSAttachmentPickerPhotoPreviewController *previewController = [[HSAttachmentPickerPhotoPreviewController alloc] init];
             previewController.delegate = self;
             previewController.info = info;
-            [picker pushViewController:previewController animated:true];
+            [picker pushViewController:previewController animated:YES];
         }
         return;
     }
-    [picker dismissViewControllerAnimated:true completion:nil];
+    [picker dismissViewControllerAnimated:YES completion:nil];
     if (info[UIImagePickerControllerMediaType] == (NSString*)kUTTypeMovie) {
         [self saveVideoFromCamera:info];
     } else {
