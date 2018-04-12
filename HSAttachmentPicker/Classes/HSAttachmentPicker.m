@@ -6,11 +6,15 @@
 #import "HSAttachmentPickerPhotoPreviewController.h"
 
 @interface HSAttachmentPicker () <HSAttachmentPickerPhotoPreviewControllerDelegate, UIDocumentMenuDelegate, UIDocumentPickerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@property(nonatomic) HSAttachmentPicker *selfReference;
+
 @end
 
 @implementation HSAttachmentPicker
 
 -(void)showAttachmentMenu {
+    self.selfReference = self;
     UIAlertController *picker = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     NSString *showPhotosPermissionSettingsMessage = [NSBundle.mainBundle objectForInfoDictionaryKey:@"NSPhotoLibraryUsageDescription"];
     if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera] && showPhotosPermissionSettingsMessage != nil) {
@@ -170,6 +174,7 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(attachmentPickerMenuDismissed:)]) {
         [self.delegate attachmentPickerMenuDismissed:self];
     }
+    self.selfReference = nil;
 }
 
 - (void)showError:(NSString *)errorMessage {
