@@ -2,19 +2,17 @@
 
 #import <HSAttachmentPicker/HSAttachmentPicker.h>
 
-@interface HSAttachmentPickerViewController () <HSAttachmentPickerDelegate> {
-    HSAttachmentPicker *_menu;
-}
+@interface HSAttachmentPickerViewController () <HSAttachmentPickerDelegate>
 
 @end
 
 @implementation HSAttachmentPickerViewController
 
 - (IBAction)openMenu:(id)sender {
-    _menu = [[HSAttachmentPicker alloc] init];
-    _menu.delegate = self;
-    _menu.translationTable = @"HSAttachmentPicker";
-    [_menu showAttachmentMenu];
+    HSAttachmentPicker *menu = [[HSAttachmentPicker alloc] init];
+    menu.delegate = self;
+    menu.translationTable = @"HSAttachmentPicker";
+    [menu showAttachmentMenu];
 }
 
 - (void)attachmentPickerMenu:(HSAttachmentPicker * _Nonnull)menu showController:(UIViewController * _Nonnull)controller completion:(void (^ _Nullable)(void))completion {
@@ -32,6 +30,10 @@
 
 - (void)attachmentPickerMenu:(HSAttachmentPicker * _Nonnull)menu upload:(NSData * _Nonnull)data filename:(NSString * _Nonnull)filename image:(UIImage * _Nullable)image {
     NSLog(@"uploading %@", filename);
+}
+
+- (void)attachmentPickerMenuDismissed:(HSAttachmentPicker *)menu {
+    NSLog(@"dismissed");
 }
 
 @end

@@ -14,14 +14,10 @@
 You'll want to create a new `HSAttachmentPicker`, assign a delegate, and call `showAttachmentMenu`.
 
 ```objective-c
-menu = [[HSAttachmentPicker alloc] init];
+HSAttachmentPicker *menu = [[HSAttachmentPicker alloc] init];
 menu.delegate = self;
 [menu showAttachmentMenu];
 ```
-
-It's important you class holds a reference to the `HSAttachmentPicker` so it doesn't get garbage collected.
-
-
 
 
 ## Example
