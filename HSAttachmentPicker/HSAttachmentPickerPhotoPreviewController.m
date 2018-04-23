@@ -1,9 +1,5 @@
 #import "HSAttachmentPickerPhotoPreviewController.h"
 
-@interface HSAttachmentPickerPhotoPreviewController ()
-
-@end
-
 @implementation HSAttachmentPickerPhotoPreviewController
 
 - (void)viewDidLoad {
