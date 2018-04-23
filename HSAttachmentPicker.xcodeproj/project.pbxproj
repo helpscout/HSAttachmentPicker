@@ -7,23 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4BBC0646208E34F400B7B7FC /* HSAttachmentPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BBC0644208E34F400B7B7FC /* HSAttachmentPicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4BBC0654208E353100B7B7FC /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 4BBC064D208E353100B7B7FC /* .gitkeep */; };
 		4BBC0655208E353100B7B7FC /* HSAttachmentPickerPhotoPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBC064F208E353100B7B7FC /* HSAttachmentPickerPhotoPreviewController.m */; };
 		4BBC0656208E353100B7B7FC /* HSAttachmentPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BBC0650208E353100B7B7FC /* HSAttachmentPicker.h */; };
-		4BBC0657208E353100B7B7FC /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 4BBC0651208E353100B7B7FC /* .gitkeep */; };
 		4BBC0658208E353100B7B7FC /* HSAttachmentPickerPhotoPreviewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BBC0652208E353100B7B7FC /* HSAttachmentPickerPhotoPreviewController.h */; };
 		4BBC0659208E353100B7B7FC /* HSAttachmentPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBC0653208E353100B7B7FC /* HSAttachmentPicker.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4BBC0641208E34F400B7B7FC /* HSAttachmentPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HSAttachmentPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4BBC0644208E34F400B7B7FC /* HSAttachmentPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSAttachmentPicker.h; sourceTree = "<group>"; };
 		4BBC0645208E34F400B7B7FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4BBC064D208E353100B7B7FC /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		4BBC064F208E353100B7B7FC /* HSAttachmentPickerPhotoPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSAttachmentPickerPhotoPreviewController.m; sourceTree = "<group>"; };
 		4BBC0650208E353100B7B7FC /* HSAttachmentPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSAttachmentPicker.h; sourceTree = "<group>"; };
-		4BBC0651208E353100B7B7FC /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		4BBC0652208E353100B7B7FC /* HSAttachmentPickerPhotoPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSAttachmentPickerPhotoPreviewController.h; sourceTree = "<group>"; };
 		4BBC0653208E353100B7B7FC /* HSAttachmentPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSAttachmentPicker.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,32 +52,13 @@
 		4BBC0643208E34F400B7B7FC /* HSAttachmentPicker */ = {
 			isa = PBXGroup;
 			children = (
-				4BBC064C208E353100B7B7FC /* Assets */,
-				4BBC064E208E353100B7B7FC /* Classes */,
-				4BBC0644208E34F400B7B7FC /* HSAttachmentPicker.h */,
-				4BBC0645208E34F400B7B7FC /* Info.plist */,
-			);
-			path = HSAttachmentPicker;
-			sourceTree = "<group>";
-		};
-		4BBC064C208E353100B7B7FC /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				4BBC064D208E353100B7B7FC /* .gitkeep */,
-			);
-			path = Assets;
-			sourceTree = "<group>";
-		};
-		4BBC064E208E353100B7B7FC /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				4BBC0651208E353100B7B7FC /* .gitkeep */,
 				4BBC0650208E353100B7B7FC /* HSAttachmentPicker.h */,
 				4BBC0653208E353100B7B7FC /* HSAttachmentPicker.m */,
 				4BBC0652208E353100B7B7FC /* HSAttachmentPickerPhotoPreviewController.h */,
 				4BBC064F208E353100B7B7FC /* HSAttachmentPickerPhotoPreviewController.m */,
+				4BBC0645208E34F400B7B7FC /* Info.plist */,
 			);
-			path = Classes;
+			path = HSAttachmentPicker;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -94,7 +69,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4BBC0656208E353100B7B7FC /* HSAttachmentPicker.h in Headers */,
-				4BBC0646208E34F400B7B7FC /* HSAttachmentPicker.h in Headers */,
 				4BBC0658208E353100B7B7FC /* HSAttachmentPickerPhotoPreviewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -156,8 +130,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4BBC0654208E353100B7B7FC /* .gitkeep in Resources */,
-				4BBC0657208E353100B7B7FC /* .gitkeep in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
