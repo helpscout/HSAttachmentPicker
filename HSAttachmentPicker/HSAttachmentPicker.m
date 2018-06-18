@@ -62,9 +62,15 @@
 -(void)showDocumentPicker {
     @try {
         NSArray *documentTypes = [[NSArray alloc] initWithObjects:(NSString*)kUTTypeItem, nil];
-        UIDocumentMenuViewController *documentMenu = [[UIDocumentMenuViewController alloc] initWithDocumentTypes:documentTypes inMode:UIDocumentPickerModeImport];
-        documentMenu.delegate = self;
-        [self.delegate attachmentPickerMenu:self showController:documentMenu completion:nil];
+        if (@available(iOS 11.0, *)) {
+            UIDocumentPickerViewController *documentMenu = [[UIDocumentPickerViewController alloc] initWithDocumentTypes:documentTypes inMode:UIDocumentPickerModeImport];
+            documentMenu.delegate = self;
+            [self.delegate attachmentPickerMenu:self showController:documentMenu completion:nil];
+        } else {
+            UIDocumentMenuViewController *documentMenu = [[UIDocumentMenuViewController alloc] initWithDocumentTypes:documentTypes inMode:UIDocumentPickerModeImport];
+            documentMenu.delegate = self;
+            [self.delegate attachmentPickerMenu:self showController:documentMenu completion:nil];
+        }
     }
     @catch (NSException *exception) {
         [self showError:[self translateString:@"This application is not entitled to access iCloud"]];
