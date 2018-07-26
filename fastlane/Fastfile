@@ -1,0 +1,11 @@
+update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc  "Generates a build of HSAttachmentPicker.framework"
+  lane :build_framework do
+    FileUtils.remove_dir("../Carthage/") if File.exists? "../Carthage/"
+    carthage command: "build", no_skip_current: true, platform: "iOS"
+  end
+end
