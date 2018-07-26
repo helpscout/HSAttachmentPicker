@@ -1,8 +1,6 @@
-
-
 Pod::Spec.new do |s|
   s.name             = 'HSAttachmentPicker'
-  s.version          = '1.0.3'
+  s.version          = '1.0.6'
   s.summary          = 'Provides a UIAlertMenu to access photos, camera, and document browser'
 
   s.homepage         = 'https://github.com/helpscout/HSAttachmentPicker'
@@ -12,6 +10,5 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'HSAttachmentPicker/**/*'
-
+  s.source_files = 'HSAttachmentPicker/**/*.{h,m}'
 end
