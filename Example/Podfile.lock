@@ -6,18 +6,14 @@ DEPENDENCIES:
   - HSAttachmentPicker (from `../`)
   - Kiwi
 
-SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
-    - Kiwi
-
 EXTERNAL SOURCES:
   HSAttachmentPicker:
-    :path: "../"
+    :path: ../
 
 SPEC CHECKSUMS:
-  HSAttachmentPicker: 64d9c5a819f9a0ffcebd062b12a6046ceabed94d
+  HSAttachmentPicker: 7e75316084004a84eb767e066523688ef3ceb326
   Kiwi: f49c9d54b28917df5928fe44968a39ed198cb8a8
 
-PODFILE CHECKSUM: 13131ca2c50d77a7934bcb813022b2cbc85145b3
+PODFILE CHECKSUM: ebf81eab5d3bccdcc4a22177e4b2f63c7cb20eb2
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.4.0
