@@ -7,5 +7,6 @@ platform :ios do
   lane :build_framework do
     FileUtils.remove_dir("../Carthage/") if File.exists? "../Carthage/"
     carthage command: "build", no_skip_current: true, platform: "iOS"
+    carthage command: "archive", frameworks: ["HSAttachmentPicker"]
   end
 end
