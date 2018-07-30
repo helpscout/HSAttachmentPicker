@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4BBC0655208E353100B7B7FC /* HSAttachmentPickerPhotoPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBC064F208E353100B7B7FC /* HSAttachmentPickerPhotoPreviewController.m */; };
-		4BBC0656208E353100B7B7FC /* HSAttachmentPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BBC0650208E353100B7B7FC /* HSAttachmentPicker.h */; };
-		4BBC0658208E353100B7B7FC /* HSAttachmentPickerPhotoPreviewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BBC0652208E353100B7B7FC /* HSAttachmentPickerPhotoPreviewController.h */; };
+		4BBC0656208E353100B7B7FC /* HSAttachmentPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BBC0650208E353100B7B7FC /* HSAttachmentPicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4BBC0658208E353100B7B7FC /* HSAttachmentPickerPhotoPreviewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BBC0652208E353100B7B7FC /* HSAttachmentPickerPhotoPreviewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BBC0659208E353100B7B7FC /* HSAttachmentPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBC0653208E353100B7B7FC /* HSAttachmentPicker.m */; };
 /* End PBXBuildFile section */
 
