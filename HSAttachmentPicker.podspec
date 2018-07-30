@@ -10,6 +10,5 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'HSAttachmentPicker/**/*'
-
+  s.source_files = 'HSAttachmentPicker/**/*.{h,m}'
 end

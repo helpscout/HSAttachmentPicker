@@ -17,5 +17,5 @@
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "HSAttachmentPicker/**/*"
+  "source_files": "HSAttachmentPicker/**/*.{h,m}"
 }
