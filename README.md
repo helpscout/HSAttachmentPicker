@@ -30,11 +30,11 @@ The example project only contains a simple delegate that logs the operations for
 
 In order to use the photo and camera related features, the `NSPhotoLibraryUsageDescription` and `NSCameraUsageDescription` properties need to be set in your application's `Info.plist` file. Without these the menu items will be unavailable.
 
-<img src="https://github.com/helpscout/HSAttachmentPicker/raw/master/picker_photo_permissions.png" width="650" height="376">
+<img src="https://github.com/helpscout/HSAttachmentPicker/raw/master/picker_photos_permissions.png" width="650" height="376">
 
 For access to the document picker, you'll need the entitlements for iCloud and iCloud Containers. This will throw an error message via the delegate on the 'Import file from' menu option otherwise.
 
-<img src="https://github.com/helpscout/HSAttachmentPicker/raw/master/picker_icloud_permissions.png width="856" height="346">
+<img src="https://github.com/helpscout/HSAttachmentPicker/raw/master/picker_icloud_permissions.png" width="856" height="346">
 
 ## Installation
 
