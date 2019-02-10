@@ -11,7 +11,11 @@
 
 ## Usage
 
-You'll want to create a new `HSAttachmentPicker`, assign a delegate, and call `showAttachmentMenu`.
+To use the attachment picker, create a new `HSAttachmentPicker` instance, assign a delegate, and call `showAttachmentMenu`.
+
+#### Objective-C
+
+You can find a full example of using the attachment picker in the [example project](Example).
 
 ```objective-c
 HSAttachmentPicker *menu = [[HSAttachmentPicker alloc] init];
@@ -19,6 +23,38 @@ menu.delegate = self;
 [menu showAttachmentMenu];
 ```
 
+#### Swift
+
+```swift
+class ViewController: UIViewController {
+  let picker = HSAttachmentPicker()
+
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+
+    picker.delegate = self
+    picker.showAttachmentMenu()
+  }
+}
+
+extension ViewController: HSAttachmentPickerDelegate {
+  func attachmentPickerMenu(_ menu: HSAttachmentPicker, showErrorMessage errorMessage: String) {
+    // Handle errors
+  }
+
+  func attachmentPickerMenuDismissed(_ menu: HSAttachmentPicker) {
+    // Run some code when the picker is dismissed
+  }
+
+  func attachmentPickerMenu(_ menu: HSAttachmentPicker, show controller: UIViewController, completion: (() -> Void)? = nil) {
+    self.present(controller, animated: true, completion: completion)
+  }
+
+  func attachmentPickerMenu(_ menu: HSAttachmentPicker, upload data: Data, filename: String, image: UIImage?) {
+    // Do something with the data of the selected attachment, i.e. upload it to a web service
+  }
+}
+```
 
 ## Example
 
