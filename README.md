@@ -113,6 +113,12 @@ The following strings can be specified to override the default messaging:
 "Unable to save photo: %@"="Unable to save photo: %@";
 
 "Selected media type is unsupported"="Selected media type is unsupported";
+
+/* Preview */
+
+"Preview": "Preview";
+
+"Use": "Use";
 ```
 
 By default it will check `NSBundle.mainBundle` and `Localizable.strings`, but these values can be overriden with the `translationsBundle` and `translationsTable` properties on the `HSAttachmentPicker` object.
