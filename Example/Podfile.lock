@@ -1,19 +1,23 @@
 PODS:
-  - HSAttachmentPicker (1.0.3)
-  - Kiwi (2.4.0)
+  - HSAttachmentPicker (1.0.9)
+  - Kiwi (3.0.0)
 
 DEPENDENCIES:
   - HSAttachmentPicker (from `../`)
   - Kiwi
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Kiwi
+
 EXTERNAL SOURCES:
   HSAttachmentPicker:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  HSAttachmentPicker: 7e75316084004a84eb767e066523688ef3ceb326
-  Kiwi: f49c9d54b28917df5928fe44968a39ed198cb8a8
+  HSAttachmentPicker: f8a7039d742d606a80596428684ee45966d6b6ac
+  Kiwi: fbeafef0f00e4d8f7dcb3420a4930afe70af77f7
 
 PODFILE CHECKSUM: ebf81eab5d3bccdcc4a22177e4b2f63c7cb20eb2
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3
