@@ -1,5 +1,11 @@
 #import "HSAttachmentPickerPhotoPreviewController.h"
 
+@interface HSAttachmentPickerPhotoPreviewController ()
+
+@property (nonatomic) BOOL wasNavigationBarHidden;
+
+@end
+
 @implementation HSAttachmentPickerPhotoPreviewController
 
 - (void)viewDidLoad {
@@ -12,6 +18,24 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[self translateString:@"Use"] style:UIBarButtonItemStyleDone target:self action:@selector(usePhoto)];
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
+    if (self.navigationController.navigationBarHidden) {
+        [self.navigationController setNavigationBarHidden:NO];
+        self.wasNavigationBarHidden = YES;
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+
+    if (self.wasNavigationBarHidden) {
+        [self.navigationController setNavigationBarHidden:YES];
+    }
+}
+
 
 -(void)usePhoto {
     [self.navigationController dismissViewControllerAnimated:true completion:nil];
