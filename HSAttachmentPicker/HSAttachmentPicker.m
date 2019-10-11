@@ -269,6 +269,8 @@
             [self uploadSavedMedia:info];
         } else {
             HSAttachmentPickerPhotoPreviewController *previewController = [[HSAttachmentPickerPhotoPreviewController alloc] init];
+            previewController.translationsBundle = self.translationsBundle;
+            previewController.translationTable = self.translationTable;
             previewController.delegate = self;
             previewController.info = info;
             [picker pushViewController:previewController animated:YES];

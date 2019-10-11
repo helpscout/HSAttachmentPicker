@@ -8,14 +8,19 @@
     self.view = image;
     self.view.backgroundColor = UIColor.whiteColor;
     self.view.contentMode = UIViewContentModeScaleAspectFit;
-    self.title = @"Preview";
+    self.title = [self translateString:@"Preview"];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Use" style:UIBarButtonItemStyleDone target:self action:@selector(usePhoto)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[self translateString:@"Use"] style:UIBarButtonItemStyleDone target:self action:@selector(usePhoto)];
 }
 
 -(void)usePhoto {
     [self.navigationController dismissViewControllerAnimated:true completion:nil];
     [_delegate photoPreview:self usePhoto:self.info];
+}
+
+- (NSString *)translateString:(NSString *)key {
+    NSBundle *bundle = self.translationsBundle ? self.translationsBundle : NSBundle.mainBundle;
+    return [bundle localizedStringForKey:key value:nil table:self.translationTable];
 }
 
 @end

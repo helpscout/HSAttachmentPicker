@@ -14,4 +14,14 @@
 
 @property (nonatomic, strong, nonnull) NSDictionary<NSString *,id> *info;
 
+/**
+ * This will default to NSBundle.mainBundle unless specified
+ */
+@property (nonatomic, nullable) NSBundle *translationsBundle;
+
+/**
+ * Use this specific .strings file for translations, uses system default (Localizable.strings) otherwise
+ */
+@property (nonatomic, nullable) NSString *translationTable;
+
 @end
