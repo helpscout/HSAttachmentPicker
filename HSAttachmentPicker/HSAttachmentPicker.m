@@ -13,6 +13,14 @@
 
 @implementation HSAttachmentPicker
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.preferredVideoQuality = UIImagePickerControllerQualityTypeMedium;
+    }
+    return self;
+}
+
 -(void)showAttachmentMenu {
     self.selfReference = self;
     UIAlertController *picker = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
@@ -126,7 +134,7 @@
     imagePicker.delegate = self;
     imagePicker.allowsEditing = NO;
     imagePicker.mediaTypes = [[NSArray alloc] initWithObjects:(NSString*)kUTTypeImage, (NSString*)kUTTypeMovie, nil];
-    imagePicker.videoQuality = UIImagePickerControllerQualityTypeLow;
+    imagePicker.videoQuality = self.preferredVideoQuality;
     imagePicker.sourceType = sourceType;
     [self.delegate attachmentPickerMenu:self showController:imagePicker completion:^{
         UIApplication.sharedApplication.statusBarHidden = YES;
@@ -261,6 +269,8 @@
             [self uploadSavedMedia:info];
         } else {
             HSAttachmentPickerPhotoPreviewController *previewController = [[HSAttachmentPickerPhotoPreviewController alloc] init];
+            previewController.translationsBundle = self.translationsBundle;
+            previewController.translationTable = self.translationTable;
             previewController.delegate = self;
             previewController.info = info;
             [picker pushViewController:previewController animated:YES];

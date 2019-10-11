@@ -19,6 +19,11 @@
 
 @property (nonatomic, weak, nullable) id<HSAttachmentPickerDelegate> delegate;
 
+
+/// The desired video quality to return selected movies in
+/// Defaults to UIImagePickerControllerQualityTypeMedium
+@property (nonatomic) UIImagePickerControllerQualityType preferredVideoQuality;
+
 /**
  * This will default to NSBundle.mainBundle unless specified
  */
