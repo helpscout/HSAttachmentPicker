@@ -12,3 +12,4 @@ language: objective-c
 script:
 - set -o pipefail && xcodebuild test -enableCodeCoverage YES -workspace Example/HSAttachmentPicker.xcworkspace -scheme HSAttachmentPicker-Example -configuration Debug -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.2' -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
 - pod lib lint
+- carthage build --no-skip-current --platform iOS

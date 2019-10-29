@@ -1,6 +1,6 @@
 {
   "name": "HSAttachmentPicker",
-  "version": "1.0.3",
+  "version": "1.0.9",
   "summary": "Provides a UIAlertMenu to access photos, camera, and document browser",
   "homepage": "https://github.com/helpscout/HSAttachmentPicker",
   "license": {
@@ -12,7 +12,7 @@
   },
   "source": {
     "git": "https://github.com/helpscout/HSAttachmentPicker.git",
-    "tag": "1.0.3"
+    "tag": "1.0.9"
   },
   "platforms": {
     "ios": "8.0"

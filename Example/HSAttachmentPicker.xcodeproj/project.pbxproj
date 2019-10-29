@@ -320,7 +320,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-HSAttachmentPicker_Tests/Pods-HSAttachmentPicker_Tests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-HSAttachmentPicker_Tests/Pods-HSAttachmentPicker_Tests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Kiwi/Kiwi.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -329,7 +329,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HSAttachmentPicker_Tests/Pods-HSAttachmentPicker_Tests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HSAttachmentPicker_Tests/Pods-HSAttachmentPicker_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		3F35DB9E75D2AC7C4FA4FE30 /* [CP] Check Pods Manifest.lock */ = {
@@ -374,7 +374,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-HSAttachmentPicker_Example/Pods-HSAttachmentPicker_Example-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-HSAttachmentPicker_Example/Pods-HSAttachmentPicker_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/HSAttachmentPicker/HSAttachmentPicker.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -383,7 +383,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HSAttachmentPicker_Example/Pods-HSAttachmentPicker_Example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HSAttachmentPicker_Example/Pods-HSAttachmentPicker_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
