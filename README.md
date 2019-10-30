@@ -1,9 +1,9 @@
 # HSAttachmentPicker
 
 [![CI Status](http://img.shields.io/travis/helpscout/HSAttachmentPicker.svg?style=flat)](https://travis-ci.org/helpscout/HSAttachmentPicker)
-[![Version](https://img.shields.io/cocoapods/v/HSAttachmentPicker.svg?style=flat)](http://cocoapods.org/pods/HSAttachmentPicker)
-[![License](https://img.shields.io/cocoapods/l/HSAttachmentPicker.svg?style=flat)](http://cocoapods.org/pods/HSAttachmentPicker)
-[![Platform](https://img.shields.io/cocoapods/p/HSAttachmentPicker.svg?style=flat)](http://cocoapods.org/pods/HSAttachmentPicker)
+[![Version](https://img.shields.io/cocoapods/v/AttachmentPicker.svg?style=flat)](http://cocoapods.org/pods/AttachmentPicker)
+[![License](https://img.shields.io/cocoapods/l/AttachmentPicker.svg?style=flat)](http://cocoapods.org/pods/AttachmentPicker)
+[![Platform](https://img.shields.io/cocoapods/p/AttachmentPicker.svg?style=flat)](http://cocoapods.org/pods/AttachmentPicker)
 
 `HSAttachmentPicker` creates a `UIAlertController` as a menu to access file data from photos, the camera, and the document browser APIs available on iOS.
 
