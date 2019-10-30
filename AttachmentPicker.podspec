@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name             = 'HSAttachmentPicker'
+  s.name             = 'AttachmentPicker'
   s.version          = '1.0.9'
   s.summary          = 'Provides a UIAlertMenu to access photos, camera, and document browser'
 
