@@ -21,7 +21,7 @@
     return self;
 }
 
--(void)showAttachmentMenu {
+- (void)showAttachmentMenu {
     self.selfReference = self;
     UIAlertController *picker = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     NSString *showPhotosPermissionSettingsMessage = [NSBundle.mainBundle objectForInfoDictionaryKey:@"NSPhotoLibraryUsageDescription"];
@@ -67,7 +67,7 @@
 }
 
 #pragma mark - import file
--(void)showDocumentPicker {
+- (void)showDocumentPicker {
     @try {
         NSArray<NSString *> *documentTypes = [[NSArray alloc] initWithObjects:(NSString*)kUTTypeItem, nil];
         UIDocumentPickerViewController *documentMenu = [[UIDocumentPickerViewController alloc] initWithDocumentTypes:documentTypes inMode:UIDocumentPickerModeImport];
@@ -80,7 +80,7 @@
 }
 
 #pragma mark - use last photo
--(void)useLastPhoto {
+- (void)useLastPhoto {
     PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
     fetchOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
     PHFetchResult<PHAsset *> *fetchResult = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:fetchOptions];
@@ -92,7 +92,7 @@
 }
 
 #pragma mark - permissions check for photos
--(void)validatePhotosPermissions:(void(^)(void))completion {
+- (void)validatePhotosPermissions:(void(^)(void))completion {
     dispatch_async(dispatch_get_main_queue(), ^{
         if (PHPhotoLibrary.authorizationStatus == PHAuthorizationStatusAuthorized) {
             completion();
@@ -110,7 +110,7 @@
     });
 }
 
--(void)showPhotosPermissionSettingsMessage {
+- (void)showPhotosPermissionSettingsMessage {
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *accessDescription = [NSBundle.mainBundle objectForInfoDictionaryKey:@"NSPhotoLibraryUsageDescription"];
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:accessDescription message:[self translateString:@"To give permissions tap on 'Change Settings' button"] preferredStyle:UIAlertControllerStyleAlert];
@@ -126,7 +126,7 @@
 }
 
 #pragma mark - open image picker for camera or photo library
--(void)showImagePicker:(UIImagePickerControllerSourceType)sourceType {
+- (void)showImagePicker:(UIImagePickerControllerSourceType)sourceType {
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.delegate = self;
     imagePicker.allowsEditing = NO;
@@ -141,7 +141,7 @@
 #pragma mark - save from camera
 - (void)saveVideoFromCamera:(NSDictionary<UIImagePickerControllerInfoKey, id> * _Nonnull)info {
     NSURL *url = info[UIImagePickerControllerMediaURL];
-    NSMutableDictionary *placeholder = [[NSMutableDictionary alloc]init];
+    NSMutableDictionary *placeholder = [[NSMutableDictionary alloc] init];
     [PHPhotoLibrary.sharedPhotoLibrary performChanges:^{
         PHAssetChangeRequest *request = [PHAssetChangeRequest creationRequestForAssetFromVideoAtFileURL:url];
         placeholder[@"asset"] = request.placeholderForCreatedAsset;
@@ -218,7 +218,7 @@
     [self upload:videoData filename:filename image:nil];
 }
 
--(void)uploadPhoto:(PHAsset*)photo {
+- (void)uploadPhoto:(PHAsset*)photo {
     PHImageRequestOptions *requestOptions = [[PHImageRequestOptions alloc] init];
     CGSize targetSize = photo.pixelWidth > photo.pixelHeight ? CGSizeMake(1024, 768) : CGSizeMake(768, 1024);
     requestOptions.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
@@ -244,7 +244,7 @@
     }
 }
 
--(void)documentPickerWasCancelled:(UIDocumentPickerViewController *)controller {
+- (void)documentPickerWasCancelled:(UIDocumentPickerViewController *)controller {
     [self dismissed];
 }
 
@@ -273,7 +273,7 @@
     }
 }
 
--(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:^{
         [self dismissed];
     }];

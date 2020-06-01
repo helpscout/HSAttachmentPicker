@@ -37,7 +37,7 @@
 }
 
 
--(void)usePhoto {
+- (void)usePhoto {
     [self.navigationController dismissViewControllerAnimated:true completion:nil];
     [_delegate photoPreview:self usePhoto:self.info];
 }

@@ -14,14 +14,10 @@
 
 @property (nonatomic, strong, nonnull) NSDictionary<UIImagePickerControllerInfoKey, id> *info;
 
-/**
- * This will default to NSBundle.mainBundle unless specified
- */
+/// The bundle to use when accessing localizations.  If translationsBundle is nil or unset [NSBundle mainBundle] will be used.
 @property (nonatomic, nullable) NSBundle *translationsBundle;
 
-/**
- * Use this specific .strings file for translations, uses system default (Localizable.strings) otherwise
- */
+/// The name of the strings translation table to search. If translationTable is nil or is an empty string, translations will use the table in Localizable.strings.
 @property (nonatomic, nullable) NSString *translationTable;
 
 @end
