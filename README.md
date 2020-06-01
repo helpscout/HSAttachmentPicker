@@ -121,7 +121,7 @@ The following strings can be specified to override the default messaging:
 "Use": "Use";
 ```
 
-By default it will check `NSBundle.mainBundle` and `Localizable.strings`, but these values can be overriden with the `translationsBundle` and `translationsTable` properties on the `HSAttachmentPicker` object.
+By default it will check `NSBundle.mainBundle` and `Localizable.strings`, but these values can be overriden with the `translationsBundle` and `translationTable` properties on the `HSAttachmentPicker` object.
 
 ## License
 
