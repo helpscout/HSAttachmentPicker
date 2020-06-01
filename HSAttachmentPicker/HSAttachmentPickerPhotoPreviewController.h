@@ -4,7 +4,7 @@
 
 @protocol HSAttachmentPickerPhotoPreviewControllerDelegate
 
--(void)photoPreview:(HSAttachmentPickerPhotoPreviewController *_Nonnull)photoPreview usePhoto:( NSDictionary<NSString *,id> *_Nonnull)info;
+- (void)photoPreview:(HSAttachmentPickerPhotoPreviewController *_Nonnull)photoPreview usePhoto:( NSDictionary<UIImagePickerControllerInfoKey, id> *_Nonnull)info;
 
 @end
 
@@ -12,7 +12,7 @@
 
 @property (nonatomic, weak, nullable) id<HSAttachmentPickerPhotoPreviewControllerDelegate> delegate;
 
-@property (nonatomic, strong, nonnull) NSDictionary<NSString *,id> *info;
+@property (nonatomic, strong, nonnull) NSDictionary<UIImagePickerControllerInfoKey, id> *info;
 
 /**
  * This will default to NSBundle.mainBundle unless specified
