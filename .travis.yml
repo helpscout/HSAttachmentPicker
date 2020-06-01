@@ -10,6 +10,6 @@ language: objective-c
 # - gem install cocoapods # Since Travis is not always on latest version
 # - pod install --project-directory=Example
 script:
-- set -o pipefail && xcodebuild test -enableCodeCoverage YES -workspace Example/HSAttachmentPicker.xcworkspace -scheme HSAttachmentPicker-Example -configuration Debug -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.2' -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+- set -o pipefail && xcodebuild test -enableCodeCoverage YES -workspace Example/HSAttachmentPicker.xcworkspace -scheme HSAttachmentPicker-Example -configuration Debug -destination 'platform=iOS Simulator,name=iPhone 11,OS=latest' -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty
 - pod lib lint
 - carthage build --no-skip-current --platform iOS
