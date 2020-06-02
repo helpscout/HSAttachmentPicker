@@ -5,7 +5,7 @@
 
 #import "HSAttachmentPickerPhotoPreviewController.h"
 
-@interface HSAttachmentPicker () <HSAttachmentPickerPhotoPreviewControllerDelegate, UIDocumentMenuDelegate, UIDocumentPickerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface HSAttachmentPicker () <HSAttachmentPickerPhotoPreviewControllerDelegate, UIDocumentPickerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property(nonatomic) HSAttachmentPicker *selfReference;
 
@@ -21,7 +21,7 @@
     return self;
 }
 
--(void)showAttachmentMenu {
+- (void)showAttachmentMenu {
     self.selfReference = self;
     UIAlertController *picker = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     NSString *showPhotosPermissionSettingsMessage = [NSBundle.mainBundle objectForInfoDictionaryKey:@"NSPhotoLibraryUsageDescription"];
@@ -67,18 +67,12 @@
 }
 
 #pragma mark - import file
--(void)showDocumentPicker {
+- (void)showDocumentPicker {
     @try {
-        NSArray *documentTypes = [[NSArray alloc] initWithObjects:(NSString*)kUTTypeItem, nil];
-        if (@available(iOS 11.0, *)) {
-            UIDocumentPickerViewController *documentMenu = [[UIDocumentPickerViewController alloc] initWithDocumentTypes:documentTypes inMode:UIDocumentPickerModeImport];
-            documentMenu.delegate = self;
-            [self.delegate attachmentPickerMenu:self showController:documentMenu completion:nil];
-        } else {
-            UIDocumentMenuViewController *documentMenu = [[UIDocumentMenuViewController alloc] initWithDocumentTypes:documentTypes inMode:UIDocumentPickerModeImport];
-            documentMenu.delegate = self;
-            [self.delegate attachmentPickerMenu:self showController:documentMenu completion:nil];
-        }
+        NSArray<NSString *> *documentTypes = [[NSArray alloc] initWithObjects:(NSString*)kUTTypeItem, nil];
+        UIDocumentPickerViewController *documentMenu = [[UIDocumentPickerViewController alloc] initWithDocumentTypes:documentTypes inMode:UIDocumentPickerModeImport];
+        documentMenu.delegate = self;
+        [self.delegate attachmentPickerMenu:self showController:documentMenu completion:nil];
     }
     @catch (NSException *exception) {
         [self showError:[self translateString:@"This application is not entitled to access iCloud"]];
@@ -86,7 +80,7 @@
 }
 
 #pragma mark - use last photo
--(void)useLastPhoto {
+- (void)useLastPhoto {
     PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
     fetchOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
     PHFetchResult<PHAsset *> *fetchResult = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:fetchOptions];
@@ -98,7 +92,7 @@
 }
 
 #pragma mark - permissions check for photos
--(void)validatePhotosPermissions:(void(^)(void))completion {
+- (void)validatePhotosPermissions:(void(^)(void))completion {
     dispatch_async(dispatch_get_main_queue(), ^{
         if (PHPhotoLibrary.authorizationStatus == PHAuthorizationStatusAuthorized) {
             completion();
@@ -116,13 +110,14 @@
     });
 }
 
--(void)showPhotosPermissionSettingsMessage {
+- (void)showPhotosPermissionSettingsMessage {
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *accessDescription = [NSBundle.mainBundle objectForInfoDictionaryKey:@"NSPhotoLibraryUsageDescription"];
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:accessDescription message:[self translateString:@"To give permissions tap on 'Change Settings' button"] preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:[self translateString:@"Cancel"] style:UIAlertActionStyleCancel handler:nil];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:[self translateString:@"OK"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [UIApplication.sharedApplication openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+            NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
         }];
         [alert addAction:cancelAction];
         [alert addAction:okAction];
@@ -131,7 +126,7 @@
 }
 
 #pragma mark - open image picker for camera or photo library
--(void)showImagePicker:(UIImagePickerControllerSourceType)sourceType {
+- (void)showImagePicker:(UIImagePickerControllerSourceType)sourceType {
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.delegate = self;
     imagePicker.allowsEditing = NO;
@@ -144,9 +139,9 @@
 }
 
 #pragma mark - save from camera
-- (void)saveVideoFromCamera:(NSDictionary<NSString *,id> * _Nonnull)info {
+- (void)saveVideoFromCamera:(NSDictionary<UIImagePickerControllerInfoKey, id> * _Nonnull)info {
     NSURL *url = info[UIImagePickerControllerMediaURL];
-    NSMutableDictionary *placeholder = [[NSMutableDictionary alloc]init];
+    NSMutableDictionary *placeholder = [[NSMutableDictionary alloc] init];
     [PHPhotoLibrary.sharedPhotoLibrary performChanges:^{
         PHAssetChangeRequest *request = [PHAssetChangeRequest creationRequestForAssetFromVideoAtFileURL:url];
         placeholder[@"asset"] = request.placeholderForCreatedAsset;
@@ -199,33 +194,31 @@
 }
 
 #pragma mark - upload operations
--(void)uploadSavedMedia:(NSDictionary<NSString *,id> *)info {
-    PHFetchResult<PHAsset *> *assets = [PHAsset fetchAssetsWithALAssetURLs:@[info[UIImagePickerControllerReferenceURL]] options:nil];
-    for (PHAsset* asset in assets) {
-        switch (asset.mediaType) {
-            case PHAssetMediaTypeImage:
-                [self uploadPhoto:asset];
-                break;
+- (void)uploadSavedMedia:(NSDictionary<UIImagePickerControllerInfoKey, id> * _Nonnull)info {
+    PHAsset *asset = info[UIImagePickerControllerPHAsset];
+    switch (asset.mediaType) {
+        case PHAssetMediaTypeImage:
+            [self uploadPhoto:asset];
+            break;
 
-            case PHAssetMediaTypeVideo:
-                [self uploadMovie:info];
-                break;
+        case PHAssetMediaTypeVideo:
+            [self uploadMovie:info];
+            break;
 
-            default:
-                [self showError:[self translateString:@"Selected media type is unsupported"]];
-                break;
-        }
+        default:
+            [self showError:[self translateString:@"Selected media type is unsupported"]];
+            break;
     }
 }
 
--(void)uploadMovie:(NSDictionary<NSString *,id> *)info {
+- (void)uploadMovie:(NSDictionary<UIImagePickerControllerInfoKey, id> * _Nonnull)info {
     NSURL *fileURL = info[UIImagePickerControllerMediaURL];
     NSData *videoData = [NSFileManager.defaultManager contentsAtPath:fileURL.path];
     NSString *filename = [NSString stringWithFormat:@"%@.mov", NSUUID.UUID.UUIDString];
     [self upload:videoData filename:filename image:nil];
 }
 
--(void)uploadPhoto:(PHAsset*)photo {
+- (void)uploadPhoto:(PHAsset*)photo {
     PHImageRequestOptions *requestOptions = [[PHImageRequestOptions alloc] init];
     CGSize targetSize = photo.pixelWidth > photo.pixelHeight ? CGSizeMake(1024, 768) : CGSizeMake(768, 1024);
     requestOptions.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
@@ -239,31 +232,24 @@
 }
 
 #pragma mark - HSAttachmentPickerPhotoPreviewControllerDelegate
-- (void)photoPreview:(HSAttachmentPickerPhotoPreviewController * _Nonnull)photoPreview usePhoto:(NSDictionary<NSString *,id> * _Nonnull)info {
+- (void)photoPreview:(HSAttachmentPickerPhotoPreviewController * _Nonnull)photoPreview usePhoto:(NSDictionary<UIImagePickerControllerInfoKey, id> * _Nonnull)info {
     [self uploadSavedMedia:info];
 }
 
-#pragma mark - UIDocumentMenuDelegate
--(void)documentMenu:(UIDocumentMenuViewController *)documentMenu didPickDocumentPicker:(UIDocumentPickerViewController *)documentPicker{
-    documentPicker.delegate = self;
-    [self.delegate attachmentPickerMenu:self showController:documentPicker completion:nil];
-}
-
--(void)documentMenuWasCancelled:(UIDocumentMenuViewController *)documentMenu {
-    [self dismissed];
-}
-
 #pragma mark - UIDocumentPickerDelegate
--(void)documentPicker:(UIDocumentPickerViewController *)controller didPickDocumentAtURL:(NSURL *)url {
-    [self upload:[NSData dataWithContentsOfURL:url] filename:url.path.lastPathComponent image:nil];
+- (void)documentPicker:(UIDocumentPickerViewController *)controller didPickDocumentsAtURLs:(NSArray<NSURL *> *)urls {
+    NSURL *url = [urls firstObject];
+    if (url) {
+        [self upload:[NSData dataWithContentsOfURL:url] filename:url.path.lastPathComponent image:nil];
+    }
 }
 
--(void)documentPickerWasCancelled:(UIDocumentPickerViewController *)controller {
+- (void)documentPickerWasCancelled:(UIDocumentPickerViewController *)controller {
     [self dismissed];
 }
 
 #pragma mark - UIImagePickerControllerDelegate
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey, id> *)info {
     if (picker.sourceType != UIImagePickerControllerSourceTypeCamera) {
         NSString *mediaType = info[UIImagePickerControllerMediaType];
         if ([mediaType isEqualToString:(NSString*)kUTTypeMovie]) {
@@ -287,7 +273,7 @@
     }
 }
 
--(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:^{
         [self dismissed];
     }];
