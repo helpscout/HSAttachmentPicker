@@ -218,17 +218,24 @@
     [self upload:videoData filename:filename image:nil];
 }
 
-- (void)uploadPhoto:(PHAsset*)photo {
+- (void)uploadPhoto:(PHAsset *)photo {
     PHImageRequestOptions *requestOptions = [[PHImageRequestOptions alloc] init];
-    CGSize targetSize = photo.pixelWidth > photo.pixelHeight ? CGSizeMake(1024, 768) : CGSizeMake(768, 1024);
     requestOptions.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
     requestOptions.resizeMode = PHImageRequestOptionsResizeModeExact;
     requestOptions.synchronous = YES;
-    [PHImageManager.defaultManager requestImageForAsset:photo targetSize:targetSize contentMode:PHImageContentModeAspectFit options:requestOptions resultHandler:^(UIImage *result, NSDictionary *info) {
-        NSData *data = UIImageJPEGRepresentation(result, 0.5);
-        NSString *filename = [photo valueForKey:@"filename"] ?: @"photo.jpg";
-        [self upload:data filename:filename.lowercaseString image:result];
-    }];
+    if (@available(iOS 13.0, *)) {
+        [PHImageManager.defaultManager requestImageDataAndOrientationForAsset:photo options:requestOptions resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, CGImagePropertyOrientation orientation, NSDictionary * _Nullable info) {
+            UIImage *image = [UIImage imageWithData:imageData];
+            NSString *filename = [photo valueForKey:@"filename"] ?: @"photo.jpg";
+            [self upload:imageData filename:filename.lowercaseString image:image];
+        }];
+    } else {
+        [PHImageManager.defaultManager requestImageDataForAsset:photo options:requestOptions resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
+            UIImage *image = [UIImage imageWithData:imageData];
+            NSString *filename = [photo valueForKey:@"filename"] ?: @"photo.jpg";
+            [self upload:imageData filename:filename.lowercaseString image:image];
+        }];
+    }
 }
 
 #pragma mark - HSAttachmentPickerPhotoPreviewControllerDelegate
