@@ -1,5 +1,5 @@
 PODS:
-  - HSAttachmentPicker (1.0.9)
+  - HSAttachmentPicker (1.1.1)
   - Kiwi (2.4.0)
 
 DEPENDENCIES:
@@ -15,9 +15,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  HSAttachmentPicker: f5d6126150869230ec944085b1ab5ce7352117df
+  HSAttachmentPicker: 770e1127727b60b4c1e295b20b8a1ce4690ac97a
   Kiwi: f49c9d54b28917df5928fe44968a39ed198cb8a8
 
 PODFILE CHECKSUM: ebf81eab5d3bccdcc4a22177e4b2f63c7cb20eb2
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.9.3
