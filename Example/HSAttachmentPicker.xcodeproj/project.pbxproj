@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		295ECC4A48CA830FF644F1F1 /* Pods_HSAttachmentPicker_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6524DF32CEBFBE6285C5AEFA /* Pods_HSAttachmentPicker_Tests.framework */; };
+		15F33D1EBD4FF73325DADDE1 /* Pods_HSAttachmentPicker_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3487A3B35360F00C9729B7DE /* Pods_HSAttachmentPicker_Example.framework */; };
+		166657B2494F57294A2E1933 /* Pods_HSAttachmentPicker_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E733F5D0CA0D73E8302074 /* Pods_HSAttachmentPicker_Tests.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -25,7 +26,6 @@
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		96378B542077ECC800289262 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 96378B532077ECC800289262 /* Localizable.strings */; };
 		96378B562077ED3C00289262 /* HSAttachmentPicker.strings in Resources */ = {isa = PBXBuildFile; fileRef = 96378B552077ED3C00289262 /* HSAttachmentPicker.strings */; };
-		A67971358337C2E46C36F2AE /* Pods_HSAttachmentPicker_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 701CB53B134476EECC468DC8 /* Pods_HSAttachmentPicker_Example.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,8 +41,9 @@
 /* Begin PBXFileReference section */
 		23016FEB85622E3E1C2D8752 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		246A9A8D8D6CAA10A7C1451D /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		4595657E3F5C22601BCA69B8 /* Pods-HSAttachmentPicker_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HSAttachmentPicker_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HSAttachmentPicker_Tests/Pods-HSAttachmentPicker_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		50F9CDE188648C344A253FAA /* Pods-HSAttachmentPicker_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HSAttachmentPicker_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-HSAttachmentPicker_Example/Pods-HSAttachmentPicker_Example.release.xcconfig"; sourceTree = "<group>"; };
+		33E733F5D0CA0D73E8302074 /* Pods_HSAttachmentPicker_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HSAttachmentPicker_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3487A3B35360F00C9729B7DE /* Pods_HSAttachmentPicker_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HSAttachmentPicker_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4612E7036ED279F082ABB498 /* Pods-HSAttachmentPicker_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HSAttachmentPicker_Tests.release.xcconfig"; path = "Target Support Files/Pods-HSAttachmentPicker_Tests/Pods-HSAttachmentPicker_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* HSAttachmentPicker_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HSAttachmentPicker_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -62,16 +63,15 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		6524DF32CEBFBE6285C5AEFA /* Pods_HSAttachmentPicker_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HSAttachmentPicker_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		701CB53B134476EECC468DC8 /* Pods_HSAttachmentPicker_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HSAttachmentPicker_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		702052E142262F8CFEAB7917 /* Pods-HSAttachmentPicker_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HSAttachmentPicker_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HSAttachmentPicker_Example/Pods-HSAttachmentPicker_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		716E76492098F4731517758E /* HSAttachmentPicker.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = HSAttachmentPicker.podspec; path = ../HSAttachmentPicker.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		96378B532077ECC800289262 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		96378B552077ED3C00289262 /* HSAttachmentPicker.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = HSAttachmentPicker.strings; sourceTree = "<group>"; };
 		9685600B1FF2EA1600850FDC /* HSAttachmentPicker_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HSAttachmentPicker_Example.entitlements; sourceTree = "<group>"; };
-		99A5BB6730D4E7DEB49C096C /* Pods-HSAttachmentPicker_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HSAttachmentPicker_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HSAttachmentPicker_Tests/Pods-HSAttachmentPicker_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		9D1FDA62D19325F29BFC95C3 /* Pods-HSAttachmentPicker_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HSAttachmentPicker_Example.debug.xcconfig"; path = "Target Support Files/Pods-HSAttachmentPicker_Example/Pods-HSAttachmentPicker_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		CF4B62EC19EF911CB2038D6C /* Pods-HSAttachmentPicker_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HSAttachmentPicker_Example.release.xcconfig"; path = "Target Support Files/Pods-HSAttachmentPicker_Example/Pods-HSAttachmentPicker_Example.release.xcconfig"; sourceTree = "<group>"; };
+		D07A50E0F06F845025206A24 /* Pods-HSAttachmentPicker_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HSAttachmentPicker_Tests.debug.xcconfig"; path = "Target Support Files/Pods-HSAttachmentPicker_Tests/Pods-HSAttachmentPicker_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +82,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				A67971358337C2E46C36F2AE /* Pods_HSAttachmentPicker_Example.framework in Frameworks */,
+				15F33D1EBD4FF73325DADDE1 /* Pods_HSAttachmentPicker_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,24 +93,13 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				295ECC4A48CA830FF644F1F1 /* Pods_HSAttachmentPicker_Tests.framework in Frameworks */,
+				166657B2494F57294A2E1933 /* Pods_HSAttachmentPicker_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4757D8D6A98728E02B42A1A4 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				702052E142262F8CFEAB7917 /* Pods-HSAttachmentPicker_Example.debug.xcconfig */,
-				50F9CDE188648C344A253FAA /* Pods-HSAttachmentPicker_Example.release.xcconfig */,
-				4595657E3F5C22601BCA69B8 /* Pods-HSAttachmentPicker_Tests.debug.xcconfig */,
-				99A5BB6730D4E7DEB49C096C /* Pods-HSAttachmentPicker_Tests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
@@ -120,7 +109,7 @@
 				6003F5B5195388D20070C39A /* Tests */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
-				4757D8D6A98728E02B42A1A4 /* Pods */,
+				8E8D293242196531D3D61471 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -140,8 +129,8 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				701CB53B134476EECC468DC8 /* Pods_HSAttachmentPicker_Example.framework */,
-				6524DF32CEBFBE6285C5AEFA /* Pods_HSAttachmentPicker_Tests.framework */,
+				3487A3B35360F00C9729B7DE /* Pods_HSAttachmentPicker_Example.framework */,
+				33E733F5D0CA0D73E8302074 /* Pods_HSAttachmentPicker_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -204,6 +193,18 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
+		8E8D293242196531D3D61471 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9D1FDA62D19325F29BFC95C3 /* Pods-HSAttachmentPicker_Example.debug.xcconfig */,
+				CF4B62EC19EF911CB2038D6C /* Pods-HSAttachmentPicker_Example.release.xcconfig */,
+				D07A50E0F06F845025206A24 /* Pods-HSAttachmentPicker_Tests.debug.xcconfig */,
+				4612E7036ED279F082ABB498 /* Pods-HSAttachmentPicker_Tests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -211,11 +212,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "HSAttachmentPicker_Example" */;
 			buildPhases = (
-				A339D42660DA1EE6074C3304 /* [CP] Check Pods Manifest.lock */,
+				F9D60CC389597847136C360F /* [CP] Check Pods Manifest.lock */,
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				BA4FAA298012DEA40ED32E26 /* [CP] Embed Pods Frameworks */,
+				CA2F9E7DF4AB5AE1EBDDC096 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -230,11 +231,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "HSAttachmentPicker_Tests" */;
 			buildPhases = (
-				3F35DB9E75D2AC7C4FA4FE30 /* [CP] Check Pods Manifest.lock */,
+				A8251A8D9C94226E2997B16C /* [CP] Check Pods Manifest.lock */,
 				6003F5AA195388D20070C39A /* Sources */,
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
-				1AA707FB7A2BB0A7024095DA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -316,34 +316,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1AA707FB7A2BB0A7024095DA /* [CP] Embed Pods Frameworks */ = {
+		A8251A8D9C94226E2997B16C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HSAttachmentPicker_Tests/Pods-HSAttachmentPicker_Tests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Kiwi/Kiwi.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kiwi.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HSAttachmentPicker_Tests/Pods-HSAttachmentPicker_Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3F35DB9E75D2AC7C4FA4FE30 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-HSAttachmentPicker_Tests-checkManifestLockResult.txt",
 			);
@@ -352,25 +338,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A339D42660DA1EE6074C3304 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-HSAttachmentPicker_Example-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BA4FAA298012DEA40ED32E26 /* [CP] Embed Pods Frameworks */ = {
+		CA2F9E7DF4AB5AE1EBDDC096 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -386,6 +354,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HSAttachmentPicker_Example/Pods-HSAttachmentPicker_Example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F9D60CC389597847136C360F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HSAttachmentPicker_Example-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -546,7 +536,7 @@
 		};
 		6003F5C0195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 702052E142262F8CFEAB7917 /* Pods-HSAttachmentPicker_Example.debug.xcconfig */;
+			baseConfigurationReference = 9D1FDA62D19325F29BFC95C3 /* Pods-HSAttachmentPicker_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HSAttachmentPicker_Example.entitlements;
@@ -567,7 +557,7 @@
 		};
 		6003F5C1195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 50F9CDE188648C344A253FAA /* Pods-HSAttachmentPicker_Example.release.xcconfig */;
+			baseConfigurationReference = CF4B62EC19EF911CB2038D6C /* Pods-HSAttachmentPicker_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HSAttachmentPicker_Example.entitlements;
@@ -588,7 +578,7 @@
 		};
 		6003F5C3195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4595657E3F5C22601BCA69B8 /* Pods-HSAttachmentPicker_Tests.debug.xcconfig */;
+			baseConfigurationReference = D07A50E0F06F845025206A24 /* Pods-HSAttachmentPicker_Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
@@ -619,7 +609,7 @@
 		};
 		6003F5C4195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 99A5BB6730D4E7DEB49C096C /* Pods-HSAttachmentPicker_Tests.release.xcconfig */;
+			baseConfigurationReference = 4612E7036ED279F082ABB498 /* Pods-HSAttachmentPicker_Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";

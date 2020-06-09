@@ -5,7 +5,5 @@ target 'HSAttachmentPicker_Example' do
 
   target 'HSAttachmentPicker_Tests' do
     inherit! :search_paths
-
-    pod 'Kiwi'
   end
 end
