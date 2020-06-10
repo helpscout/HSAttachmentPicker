@@ -1,3 +1,5 @@
+platform :ios, '11.0'
+
 use_frameworks!
 
 target 'HSAttachmentPicker_Example' do
@@ -5,7 +7,5 @@ target 'HSAttachmentPicker_Example' do
 
   target 'HSAttachmentPicker_Tests' do
     inherit! :search_paths
-
-    pod 'Kiwi'
   end
 end
