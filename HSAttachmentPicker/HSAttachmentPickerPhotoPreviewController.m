@@ -20,7 +20,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
 
     if (self.navigationController.navigationBarHidden) {
         [self.navigationController setNavigationBarHidden:NO];
