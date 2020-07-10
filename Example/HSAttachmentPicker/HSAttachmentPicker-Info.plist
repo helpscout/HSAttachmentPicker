@@ -28,6 +28,10 @@
 	<string>For attaching photos and video.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>For attaching photos.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>For attaching photos and video.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>For saving photos and video created for attachments.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
