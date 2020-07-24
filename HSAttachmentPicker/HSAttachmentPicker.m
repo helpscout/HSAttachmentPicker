@@ -146,14 +146,16 @@
         PHAssetChangeRequest *request = [PHAssetChangeRequest creationRequestForAssetFromVideoAtFileURL:url];
         placeholder[@"asset"] = request.placeholderForCreatedAsset;
     } completionHandler:^(BOOL success, NSError * _Nullable error) {
-        if (success) {
-            NSData *contents = [NSFileManager.defaultManager contentsAtPath:url.path];
-            NSString *filename = [NSString stringWithFormat:@"%@.mov", NSUUID.UUID.UUIDString];
-            [self upload:contents filename:filename image:nil];
-        } else {
-            NSString *errorMessage = [NSString stringWithFormat:[self translateString:@"Unable to save video: %@"], error.localizedDescription];
-            [self showError:errorMessage];
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (success) {
+                NSData *contents = [NSFileManager.defaultManager contentsAtPath:url.path];
+                NSString *filename = [NSString stringWithFormat:@"%@.mov", NSUUID.UUID.UUIDString];
+                [self upload:contents filename:filename image:nil];
+            } else {
+                NSString *errorMessage = [NSString stringWithFormat:[self translateString:@"Unable to save video: %@"], error.localizedDescription];
+                [self showError:errorMessage];
+            }
+        });
     }];
 }
 
@@ -162,12 +164,14 @@
         UIImage *image = info[UIImagePickerControllerOriginalImage];
         [PHAssetChangeRequest creationRequestForAssetFromImage:image];
     } completionHandler:^(BOOL success, NSError * _Nullable error) {
-        if (success) {
-            [self useLastPhoto];
-        } else {
-            NSString *errorMessage = [NSString stringWithFormat:[self translateString:@"Unable to save photo: %@"], error.localizedDescription];
-            [self showError:errorMessage];
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (success) {
+                [self useLastPhoto];
+            } else {
+                NSString *errorMessage = [NSString stringWithFormat:[self translateString:@"Unable to save photo: %@"], error.localizedDescription];
+                [self showError:errorMessage];
+            }
+        });
     }];
 }
 
