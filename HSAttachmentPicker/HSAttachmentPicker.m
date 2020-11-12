@@ -2,16 +2,19 @@
 
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <Photos/Photos.h>
+#import <PhotosUI/PhotosUI.h>
 
 #import "HSAttachmentPickerPhotoPreviewController.h"
 
-@interface HSAttachmentPicker () <HSAttachmentPickerPhotoPreviewControllerDelegate, UIDocumentPickerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface HSAttachmentPicker () <HSAttachmentPickerPhotoPreviewControllerDelegate, UIDocumentPickerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PHPickerViewControllerDelegate>
 
 @property(nonatomic) HSAttachmentPicker *selfReference;
 
 @end
 
 @implementation HSAttachmentPicker
+
+static NSString *const kBeaconUTTypeLivePhotoBundle = @"com.apple.live-photo-bundle";
 
 - (instancetype)init {
     self = [super init];
@@ -27,31 +30,51 @@
     NSString *showPhotosPermissionSettingsMessage = [NSBundle.mainBundle objectForInfoDictionaryKey:@"NSPhotoLibraryUsageDescription"];
     if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera] && showPhotosPermissionSettingsMessage != nil) {
         UIAlertAction *takePhotoAction = [UIAlertAction actionWithTitle:[self translateString:@"Take Photo"] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [self validatePhotosPermissions:^{
-                [self showImagePicker:UIImagePickerControllerSourceTypeCamera];
-            }];
+            if (@available(iOS 14.0, *)) {
+                [self validatePhotosPermissionsWithAccessLevel:PHAccessLevelAddOnly completion:^{
+                    [self showImagePicker:UIImagePickerControllerSourceTypeCamera];
+                }];
+            } else {
+                [self validatePhotosPermissions:^{
+                    [self showImagePicker:UIImagePickerControllerSourceTypeCamera];
+                }];
+            }
         }];
         [picker addAction:takePhotoAction];
     }
 
     if (showPhotosPermissionSettingsMessage != nil) {
-        UIAlertAction *useLastPhotoAction = [UIAlertAction actionWithTitle:[self translateString:@"Use Last Photo"] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [self validatePhotosPermissions:^{
-                [self useLastPhoto];
+        if (@available(iOS 14.0, *)) {
+            // the app already has access to the Photo Library so we're safe to add `Use Last Photo` here
+            if ([PHPhotoLibrary authorizationStatusForAccessLevel:PHAccessLevelReadWrite] == PHAuthorizationStatusAuthorized) {
+                UIAlertAction *useLastPhotoAction = [UIAlertAction actionWithTitle:[self translateString:@"Use Last Photo"] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    [self useLastPhoto];
+                }];
+                [picker addAction:useLastPhotoAction];
+            }
+        } else {
+            UIAlertAction *useLastPhotoAction = [UIAlertAction actionWithTitle:[self translateString:@"Use Last Photo"] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                [self validatePhotosPermissions:^{
+                    [self useLastPhoto];
+                }];
             }];
-        }];
-        [picker addAction:useLastPhotoAction];
+            [picker addAction:useLastPhotoAction];
+        }
     }
 
     if (showPhotosPermissionSettingsMessage != nil) {
         UIAlertAction *chooseFromLibraryAction = [UIAlertAction actionWithTitle:[self translateString:@"Choose from Library"] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [self validatePhotosPermissions:^{
-                [self showImagePicker:UIImagePickerControllerSourceTypePhotoLibrary];
-            }];
+            if (@available(iOS 14, *)) {
+                // don't request access to users photo library since we don't need it with PHPicker
+                [self showPhotoPicker];
+            } else {
+                [self validatePhotosPermissions:^{
+                    [self showImagePicker:UIImagePickerControllerSourceTypePhotoLibrary];
+                }];
+            }
         }];
         [picker addAction:chooseFromLibraryAction];
     }
-
 
     UIAlertAction *importFileFromAction = [UIAlertAction actionWithTitle:[self translateString:@"Import File from"] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self showDocumentPicker];
@@ -110,6 +133,24 @@
     });
 }
 
+- (void)validatePhotosPermissionsWithAccessLevel:(PHAccessLevel)accessLevel completion:(void(^)(void))completion API_AVAILABLE(ios(14)) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([PHPhotoLibrary authorizationStatusForAccessLevel:accessLevel] == PHAuthorizationStatusAuthorized) {
+            completion();
+        } else {
+            [PHPhotoLibrary requestAuthorizationForAccessLevel:accessLevel handler:^(PHAuthorizationStatus status) {
+                if (status != PHAuthorizationStatusAuthorized) {
+                    [self showPhotosPermissionSettingsMessage];
+                } else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        completion();
+                    });
+                }
+            }];
+        }
+    });
+}
+
 - (void)showPhotosPermissionSettingsMessage {
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *accessDescription = [NSBundle.mainBundle objectForInfoDictionaryKey:@"NSPhotoLibraryUsageDescription"];
@@ -138,6 +179,16 @@
     }];
 }
 
+- (void)showPhotoPicker API_AVAILABLE(ios(14)) {
+    PHPickerConfiguration *configuration = [[PHPickerConfiguration alloc] initWithPhotoLibrary:[PHPhotoLibrary sharedPhotoLibrary]];
+    configuration.filter = [PHPickerFilter anyFilterMatchingSubfilters:@[PHPickerFilter.imagesFilter, PHPickerFilter.livePhotosFilter, PHPickerFilter.videosFilter]];
+
+    PHPickerViewController *imagePicker = [[PHPickerViewController alloc] initWithConfiguration:configuration];
+    imagePicker.delegate = self;
+
+    [self.delegate attachmentPickerMenu:self showController:imagePicker completion:nil];
+}
+
 #pragma mark - save from camera
 - (void)saveVideoFromCamera:(NSDictionary<UIImagePickerControllerInfoKey, id> * _Nonnull)info {
     NSURL *url = info[UIImagePickerControllerMediaURL];
@@ -160,13 +211,15 @@
 }
 
 - (void)savePhotoFromCamera:(NSDictionary<NSString *,id> * _Nonnull)info {
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
     [PHPhotoLibrary.sharedPhotoLibrary performChanges:^{
-        UIImage *image = info[UIImagePickerControllerOriginalImage];
         [PHAssetChangeRequest creationRequestForAssetFromImage:image];
     } completionHandler:^(BOOL success, NSError * _Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (success) {
-                [self useLastPhoto];
+                NSData *data = UIImageJPEGRepresentation(image, 1.0);
+                NSString *filename = [NSString stringWithFormat:@"%@.jpg", NSUUID.UUID.UUIDString];
+                [self upload:data filename:filename image:image];
             } else {
                 NSString *errorMessage = [NSString stringWithFormat:[self translateString:@"Unable to save photo: %@"], error.localizedDescription];
                 [self showError:errorMessage];
@@ -187,9 +240,13 @@
 
 - (void)dismissed {
     if (self.delegate && [self.delegate respondsToSelector:@selector(attachmentPickerMenuDismissed:)]) {
-        [self.delegate attachmentPickerMenuDismissed:self];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.delegate attachmentPickerMenuDismissed:self];
+            self.selfReference = nil;
+        });
+    } else {
+        self.selfReference = nil;
     }
-    self.selfReference = nil;
 }
 
 - (void)showError:(NSString *)errorMessage {
@@ -290,4 +347,55 @@
     }];
 }
 
+#pragma  mark - PHPickerViewControllerDelegate
+
+- (void)picker:(PHPickerViewController *)picker didFinishPicking:(NSArray<PHPickerResult *> *)results  API_AVAILABLE(ios(14)) {
+    [picker dismissViewControllerAnimated:YES completion:nil];
+
+    PHPickerResult *result = [results firstObject];
+
+    NSItemProvider *itemProvider = result.itemProvider;
+    NSArray<NSString *> *registeredIdentifiers = itemProvider.registeredTypeIdentifiers;
+    NSString *typeIdentifier = [registeredIdentifiers firstObject];
+    if ([itemProvider canLoadObjectOfClass:[UIImage class]]) {
+        if (!typeIdentifier || [typeIdentifier isEqualToString:kBeaconUTTypeLivePhotoBundle]) {
+            typeIdentifier = (NSString *)kUTTypeJPEG;
+        }
+        [itemProvider loadFileRepresentationForTypeIdentifier:typeIdentifier completionHandler:^(NSURL * _Nullable url, NSError * _Nullable error) {
+            if (error) {
+                NSString *errorMessage = [NSString stringWithFormat:[self translateString:@"Unable to load image: %@"], error.localizedDescription];
+                [self showError:errorMessage];
+            } else if (url) {
+                NSData *data = [NSFileManager.defaultManager contentsAtPath:url.path];
+                UIImage *image = [UIImage imageWithData:data];
+                NSString *fileExtension = url.path.pathExtension;
+                if (!fileExtension) {
+                    fileExtension = @"jpg";
+                }
+                NSString *filename = [NSString stringWithFormat:@"photo.%@", fileExtension];
+                [self upload:data filename:filename image:image];
+            } else {
+                [self dismissed];
+            }
+        }];
+    } else {
+        if (!typeIdentifier) {
+            typeIdentifier = AVFileTypeMPEG4;
+        }
+        [itemProvider loadFileRepresentationForTypeIdentifier:typeIdentifier completionHandler:^(NSURL * _Nullable url, NSError * _Nullable error) {
+            if (error) {
+                NSString *errorMessage = [NSString stringWithFormat:[self translateString:@"Unable to load video: %@"], error.localizedDescription];
+                [self showError:errorMessage];
+            } else if (url) {
+                NSData *data = [NSFileManager.defaultManager contentsAtPath:url.path];
+                NSString *filename = [NSString stringWithFormat:@"%@.mov", NSUUID.UUID.UUIDString];
+                [self upload:data filename:filename image:nil];
+            } else {
+                [self dismissed];
+            }
+        }];
+    }
+}
+
 @end
+
