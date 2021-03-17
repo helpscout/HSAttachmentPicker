@@ -20,6 +20,11 @@ static NSString *const kBeaconUTTypeLivePhotoBundle = @"com.apple.live-photo-bun
     self = [super init];
     if (self) {
         self.preferredVideoQuality = UIImagePickerControllerQualityTypeMedium;
+        self.mediaTypes = @[(NSString*)kUTTypeImage, (NSString*)kUTTypeMovie];
+        if (@available(iOS 14, *)) {
+            self.pickerFilters = @[PHPickerFilter.imagesFilter, PHPickerFilter.livePhotosFilter, PHPickerFilter.videosFilter];
+        }
+        self.documentTypes = @[(NSString*)kUTTypeItem];
     }
     return self;
 }
@@ -92,8 +97,7 @@ static NSString *const kBeaconUTTypeLivePhotoBundle = @"com.apple.live-photo-bun
 #pragma mark - import file
 - (void)showDocumentPicker {
     @try {
-        NSArray<NSString *> *documentTypes = [[NSArray alloc] initWithObjects:(NSString*)kUTTypeItem, nil];
-        UIDocumentPickerViewController *documentMenu = [[UIDocumentPickerViewController alloc] initWithDocumentTypes:documentTypes inMode:UIDocumentPickerModeImport];
+        UIDocumentPickerViewController *documentMenu = [[UIDocumentPickerViewController alloc] initWithDocumentTypes:self.documentTypes inMode:UIDocumentPickerModeImport];
         documentMenu.delegate = self;
         [self.delegate attachmentPickerMenu:self showController:documentMenu completion:nil];
     }
@@ -171,7 +175,7 @@ static NSString *const kBeaconUTTypeLivePhotoBundle = @"com.apple.live-photo-bun
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.delegate = self;
     imagePicker.allowsEditing = NO;
-    imagePicker.mediaTypes = [[NSArray alloc] initWithObjects:(NSString*)kUTTypeImage, (NSString*)kUTTypeMovie, nil];
+    imagePicker.mediaTypes = self.mediaTypes;
     imagePicker.videoQuality = self.preferredVideoQuality;
     imagePicker.sourceType = sourceType;
     [self.delegate attachmentPickerMenu:self showController:imagePicker completion:^{
@@ -181,7 +185,9 @@ static NSString *const kBeaconUTTypeLivePhotoBundle = @"com.apple.live-photo-bun
 
 - (void)showPhotoPicker API_AVAILABLE(ios(14)) {
     PHPickerConfiguration *configuration = [[PHPickerConfiguration alloc] initWithPhotoLibrary:[PHPhotoLibrary sharedPhotoLibrary]];
-    configuration.filter = [PHPickerFilter anyFilterMatchingSubfilters:@[PHPickerFilter.imagesFilter, PHPickerFilter.livePhotosFilter, PHPickerFilter.videosFilter]];
+    if (self.pickerFilters) {
+        configuration.filter = [PHPickerFilter anyFilterMatchingSubfilters:self.pickerFilters];
+    }
 
     PHPickerViewController *imagePicker = [[PHPickerViewController alloc] initWithConfiguration:configuration];
     imagePicker.delegate = self;

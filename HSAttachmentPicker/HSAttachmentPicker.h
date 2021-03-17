@@ -1,4 +1,5 @@
 #import <UIKit/UIKit.h>
+#import <PhotosUI/PhotosUI.h>
 
 @class HSAttachmentPicker;
 
@@ -22,6 +23,18 @@
 
 /// The desired video quality to return selected movies in, defaults to UIImagePickerControllerQualityTypeMedium
 @property (nonatomic) UIImagePickerControllerQualityType preferredVideoQuality;
+
+/// An array that indicates the media types to be accessed by the media picker controller.  This maps to UIImagePickerController.mediaTypes so all applicable discussion applies to this property as well (e.g if empty the system will throw an exception)
+/// Default: @[(NSString*)kUTTypeImage, (NSString*)kUTTypeMovie]
+@property (nonatomic, copy, nonnull) NSArray<NSString *> *mediaTypes;
+
+/// An array that passed to the `PHPickerConfiguration.filters` used to initialize the `PHPickerViewController`
+///  Default: @[PHPickerFilter.imagesFilter, PHPickerFilter.livePhotosFilter, PHPickerFilter.videosFilter]
+@property (nonatomic, copy, nullable) NSArray<PHPickerFilter *> *pickerFilters API_AVAILABLE(ios(14));
+
+/// An array of uniform type identifiers (UTIs). UTIs are strings that uniquely identify a file’s type.
+/// Default: @[(NSString*)kUTTypeItem]
+@property (nonatomic, copy, nonnull) NSArray<NSString *> *documentTypes;
 
 /// The bundle to use when accessing localizations.  If translationsBundle is nil or unset [NSBundle mainBundle] will be used.
 @property (nonatomic, nullable) NSBundle *translationsBundle;
