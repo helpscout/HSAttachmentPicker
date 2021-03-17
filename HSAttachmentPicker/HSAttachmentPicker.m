@@ -94,7 +94,8 @@ static NSString *const kBeaconUTTypeLivePhotoBundle = @"com.apple.live-photo-bun
     [self.delegate attachmentPickerMenu:self showController:picker completion:nil];
 }
 
-#pragma mark - import file
+// MARK: Import File
+
 - (void)showDocumentPicker {
     @try {
         UIDocumentPickerViewController *documentMenu = [[UIDocumentPickerViewController alloc] initWithDocumentTypes:self.documentTypes inMode:UIDocumentPickerModeImport];
@@ -106,7 +107,8 @@ static NSString *const kBeaconUTTypeLivePhotoBundle = @"com.apple.live-photo-bun
     }
 }
 
-#pragma mark - use last photo
+// MARK: Use Last Photo
+
 - (void)useLastPhoto {
     PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
     fetchOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
@@ -118,7 +120,8 @@ static NSString *const kBeaconUTTypeLivePhotoBundle = @"com.apple.live-photo-bun
     [self uploadPhoto:fetchResult.lastObject];
 }
 
-#pragma mark - permissions check for photos
+// MARK: Permissions check for photos
+
 - (void)validatePhotosPermissions:(void(^)(void))completion {
     dispatch_async(dispatch_get_main_queue(), ^{
         if (PHPhotoLibrary.authorizationStatus == PHAuthorizationStatusAuthorized) {
@@ -170,7 +173,8 @@ static NSString *const kBeaconUTTypeLivePhotoBundle = @"com.apple.live-photo-bun
     });
 }
 
-#pragma mark - open image picker for camera or photo library
+// MARK: Open image picker for camera or photo library
+
 - (void)showImagePicker:(UIImagePickerControllerSourceType)sourceType {
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.delegate = self;
@@ -195,7 +199,8 @@ static NSString *const kBeaconUTTypeLivePhotoBundle = @"com.apple.live-photo-bun
     [self.delegate attachmentPickerMenu:self showController:imagePicker completion:nil];
 }
 
-#pragma mark - save from camera
+// MARK: Saving from Camera
+
 - (void)saveVideoFromCamera:(NSDictionary<UIImagePickerControllerInfoKey, id> * _Nonnull)info {
     NSURL *url = info[UIImagePickerControllerMediaURL];
     NSMutableDictionary *placeholder = [[NSMutableDictionary alloc] init];
@@ -260,7 +265,8 @@ static NSString *const kBeaconUTTypeLivePhotoBundle = @"com.apple.live-photo-bun
     [self dismissed];
 }
 
-#pragma mark - upload operations
+// MARK: Upload Operations
+
 - (void)uploadSavedMedia:(NSDictionary<UIImagePickerControllerInfoKey, id> * _Nonnull)info {
     PHAsset *asset = info[UIImagePickerControllerPHAsset];
     switch (asset.mediaType) {
@@ -305,12 +311,14 @@ static NSString *const kBeaconUTTypeLivePhotoBundle = @"com.apple.live-photo-bun
     }
 }
 
-#pragma mark - HSAttachmentPickerPhotoPreviewControllerDelegate
+// MARK: HSAttachmentPickerPhotoPreviewControllerDelegate
+
 - (void)photoPreview:(HSAttachmentPickerPhotoPreviewController * _Nonnull)photoPreview usePhoto:(NSDictionary<UIImagePickerControllerInfoKey, id> * _Nonnull)info {
     [self uploadSavedMedia:info];
 }
 
-#pragma mark - UIDocumentPickerDelegate
+// MARK: UIDocumentPickerDelegate
+
 - (void)documentPicker:(UIDocumentPickerViewController *)controller didPickDocumentsAtURLs:(NSArray<NSURL *> *)urls {
     NSURL *url = [urls firstObject];
     if (url) {
@@ -322,7 +330,8 @@ static NSString *const kBeaconUTTypeLivePhotoBundle = @"com.apple.live-photo-bun
     [self dismissed];
 }
 
-#pragma mark - UIImagePickerControllerDelegate
+// MARK: UIImagePickerControllerDelegate
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey, id> *)info {
     if (picker.sourceType != UIImagePickerControllerSourceTypeCamera) {
         NSString *mediaType = info[UIImagePickerControllerMediaType];
@@ -353,7 +362,7 @@ static NSString *const kBeaconUTTypeLivePhotoBundle = @"com.apple.live-photo-bun
     }];
 }
 
-#pragma  mark - PHPickerViewControllerDelegate
+// MARK: PHPickerViewControllerDelegate
 
 - (void)picker:(PHPickerViewController *)picker didFinishPicking:(NSArray<PHPickerResult *> *)results  API_AVAILABLE(ios(14)) {
     [picker dismissViewControllerAnimated:YES completion:nil];
