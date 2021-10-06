@@ -7,7 +7,7 @@
 
 `HSAttachmentPicker` creates a `UIAlertController` as a menu to access file data from photos, the camera, and the document browser APIs available on iOS.
 
-<img src="https://github.com/helpscout/HSAttachmentPicker/raw/master/picker_preview.png" width="376" height="648">
+<img src="https://github.com/helpscout/HSAttachmentPicker/raw/main/picker_preview.png" width="376" height="648">
 
 ## Usage
 
@@ -66,11 +66,11 @@ The example project only contains a simple delegate that logs the operations for
 
 In order to use the photo and camera related features, the `NSPhotoLibraryUsageDescription`, `NSCameraUsageDescription`, `NSMicrophoneUsageDescription` and `NSPhotoLibraryAddUsageDescription` properties need to be set in your application's `Info.plist` file. Without these the menu items will be unavailable.
 
-<img src="https://github.com/helpscout/HSAttachmentPicker/raw/master/picker_photos_permissions.png" width="787" height="99">
+<img src="https://github.com/helpscout/HSAttachmentPicker/raw/main/picker_photos_permissions.png" width="787" height="99">
 
 For access to the document picker, you'll need the entitlements for iCloud and iCloud Containers. This will throw an error message via the delegate on the 'Import file from' menu option otherwise.
 
-<img src="https://github.com/helpscout/HSAttachmentPicker/raw/master/picker_icloud_permissions.png" width="856" height="346">
+<img src="https://github.com/helpscout/HSAttachmentPicker/raw/main/picker_icloud_permissions.png" width="856" height="346">
 
 ## Installation
 
