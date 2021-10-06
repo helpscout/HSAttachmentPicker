@@ -3,10 +3,10 @@ update_fastlane
 default_platform(:ios)
 
 platform :ios do
-  desc  "Generates a build of HSAttachmentPicker.framework"
+  desc  "Generates a build of HSAttachmentPicker.xcframework"
   lane :build_framework do
-    FileUtils.remove_dir("../Carthage/") if File.exists? "../Carthage/"
-    carthage command: "build", no_skip_current: true, platform: "iOS"
-    carthage command: "archive", frameworks: ["HSAttachmentPicker"]
+    sh("cd ..; sh Scripts/build_framework.sh")
+  # Create an XCFramework of the device and simulator frameworks
+  sh("cd ..; sh Scripts/create_xcframework.sh")
   end
 end
